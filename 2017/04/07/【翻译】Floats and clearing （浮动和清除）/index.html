@@ -1,0 +1,931 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CSS,翻译," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="原文地址：https://www.w3.org/community/webed/wiki/Floats_and_clearing  
+
+介绍在“web标准课程”系列的这篇文章中，你将会深入学习到浮动和清除——两项现在web设计师的必备工具。它们是你可以用来使文本内容环绕流动在图像周围或者甚至可以创建多栏布局的全面的工具。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【翻译】Floats and clearing （浮动和清除）">
+<meta property="og:url" content="http://yoursite.com/2017/04/07/【翻译】Floats and clearing （浮动和清除）/index.html">
+<meta property="og:site_name" content="Aierwa | 平凡之路">
+<meta property="og:description" content="原文地址：https://www.w3.org/community/webed/wiki/Floats_and_clearing  
+
+介绍在“web标准课程”系列的这篇文章中，你将会深入学习到浮动和清除——两项现在web设计师的必备工具。它们是你可以用来使文本内容环绕流动在图像周围或者甚至可以创建多栏布局的全面的工具。">
+<meta property="og:image" content="http://yoursite.com/upload/articles/Floats_and_clearing.png">
+<meta property="og:image" content="http://yoursite.com/upload/articles/Floats_and_clearing-1.png">
+<meta property="og:image" content="http://yoursite.com/upload/articles/Floats_and_clearing-2.png">
+<meta property="og:image" content="http://yoursite.com/upload/articles/Floats_and_clearing-t1.png">
+<meta property="og:image" content="http://yoursite.com/upload/articles/Floats_and_clearing-3.png">
+<meta property="og:image" content="http://yoursite.com/upload/articles/Floats_and_clearing-4.png">
+<meta property="og:image" content="http://yoursite.com/upload/articles/Floats_and_clearing-5.png">
+<meta property="og:image" content="http://yoursite.com/upload/articles/Floats_and_clearing-t2.png">
+<meta property="og:image" content="http://yoursite.com/upload/articles/Floats_and_clearing-t3.png">
+<meta property="og:updated_time" content="2017-04-07T07:56:53.044Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【翻译】Floats and clearing （浮动和清除）">
+<meta name="twitter:description" content="原文地址：https://www.w3.org/community/webed/wiki/Floats_and_clearing  
+
+介绍在“web标准课程”系列的这篇文章中，你将会深入学习到浮动和清除——两项现在web设计师的必备工具。它们是你可以用来使文本内容环绕流动在图像周围或者甚至可以创建多栏布局的全面的工具。">
+<meta name="twitter:image" content="http://yoursite.com/upload/articles/Floats_and_clearing.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/07/【翻译】Floats and clearing （浮动和清除）/"/>
+
+
+
+
+
+  <title> 【翻译】Floats and clearing （浮动和清除） | Aierwa | 平凡之路 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aierwa | 平凡之路</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-slide">
+          <a href="/slide" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-photo"></i> <br />
+            
+            幻灯片
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/07/【翻译】Floats and clearing （浮动和清除）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aierwa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/upload/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aierwa | 平凡之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【翻译】Floats and clearing （浮动和清除）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-07T14:47:28+08:00">
+                2017-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/upload/articles/Floats_and_clearing.png" alt="aierwa"></p>
+<blockquote>
+<p>原文地址：<a href="https://www.w3.org/community/webed/wiki/Floats_and_clearing" target="_blank" rel="external">https://www.w3.org/community/webed/wiki/Floats_and_clearing</a>  </p>
+</blockquote>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在“web标准课程”系列的这篇文章中，你将会深入学习到浮动和清除——两项现在web设计师的必备工具。它们是你可以用来使文本内容环绕流动在图像周围或者甚至可以创建多栏布局的全面的工具。<br><a id="more"></a></p>
+<h2 id="浮动和清除到底是什么？"><a href="#浮动和清除到底是什么？" class="headerlink" title="浮动和清除到底是什么？"></a>浮动和清除到底是什么？</h2><p>如果你在看一本典型的杂志，你就会发现那些说明文章的图片周围围绕着文字。CSS中的<code>float</code>属性就是被创建来允许在web页面上实现这种形式布局的。浮动一张图片——或其它任何元素——可促使它出现在页面的一侧，而文字流动到另一侧。若有必要的话，可以清除一个浮动元素以防止它出现在浮动元素的旁边。</p>
+<h2 id="一些无聊的理论"><a href="#一些无聊的理论" class="headerlink" title="一些无聊的理论"></a>一些无聊的理论</h2><p>为了阐明浮动如何工作，你需要在发动机舱罩下去窥视一个web浏览器如何渲染一篇HTML/CSS文档。不要担心，我会尽量简明一些。  </p>
+<p>每一个可见的HTML元素会生成一个盒子并随后被渲染出来。如果你正在一个电脑屏幕或手机上看这个文档，这些盒子就是在显示器上渲染出来的；如果你正在打印这个文档，这些盒子就在纸上渲染；如果你正在使用一个屏幕阅读器，盒子的内容就是听觉型的渲染，如演讲一般。  </p>
+<p>正如HTML中有块级元素和行内元素一样，CSS中也存在块级和行内盒子。默认情况下，块级元素生成块级盒子，行内元素生成行内盒子。除了由元素生成的盒子外也有一些其它被生成的盒子，比如文档中的文本内容（生成行框）。块级盒子一般按元素在标记中出现的顺序，由上至下进行布置。块级盒子不能并排出现，除非我们应用某种CSS规则。行内盒子水平布置。<code>direction</code>属性决定了他们到底是从左往右布置还是从右往左布置（如果没有被修改的话，默认左至右）。  </p>
+<p>这就是所谓的文档流：行内盒子在它们的父级块级盒子里水平流动，块级盒子垂直流动。这些盒子出现的顺序与对应元素在HTML标记中的顺序一致。  </p>
+<p>考虑到如下的简单HTML文档（我仅仅只包括了<code>body</code>元素内部的部分）：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>This is a very simple document.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>It consists of <span class="tag">&lt;<span class="name">em</span>&gt;</span>two<span class="tag">&lt;/<span class="name">em</span>&gt;</span> paragraphs.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>图1所示为文档的屏幕截图，显示了两个由<code>p</code>元素生成的块级盒子和一个由<code>em</code>元素生成的行内盒子。<br><img src="/upload/articles/Floats_and_clearing-1.png" alt="aierwa" title="Figure 1: A demostration of block boxes generated by the p elements, and an inline box generated by the em element."><br>所有在输出设备上构造出一个“行”的行内盒子都被所谓的行框的假想矩形框给封闭起来。行框总是从上至下布置，并且它们之间没有空隙，如图2所示。<br><img src="/upload/articles/Floats_and_clearing-2.png" alt="aierwa" title="Figure 2: Each rendered line is enclosed in a separate line box. "></p>
+<h2 id="浮动是怎样起作用的？"><a href="#浮动是怎样起作用的？" class="headerlink" title="浮动是怎样起作用的？"></a>浮动是怎样起作用的？</h2><p>好！既然我们已经经历了所有的枯燥理论，就让我们转过来看看浮动和清除的用法以及一些例子。  </p>
+<p><code>float</code>属性有4个有效值：<em>left, right, none</em>和<em>inherit</em> 。前两个是目前最为常用的，它们使得一个盒子往左或往右浮动。默认声明<code>float:none</code>一般用来在一些其它规则中“撤销”一个声明。用法<code>float:inherit</code>大概非常少见——我从没在哪里看到它被使用过——并且大概只存在于保持一致性目的的场合吧。它会使元素从它的父元素那里继承<code>float</code>值。  </p>
+<p>一个被浮动的盒子会从文档流中抽出并且向左或向右尽可能远地移动，当然这取决于特定的浮动方向值。“尽可能远”通常意味着直到浮动盒子的外边界碰到包含块的边界为止（它的内边距里面，若有的话）。所以，对于<code>float:left</code>，盒子就会往左边移动，直到浮动元素的左外边距碰到父元素的左边界为止。  </p>
+<p>警惕的读者可能注意到了我上面说的是“通常”。假设这里已经有一个盒子向左边浮动，这时我们又按同一方向浮动另一个盒子，这个盒子就会在它碰到第一个浮动盒子时停止移动。换句话说，浮动盒子不会覆盖在另一个浮动盒子上。  </p>
+<p>是时候实际看看浮动了，准备好你的编辑器吧。  </p>
+<ul>
+<li>创建一个新文件，复制下面的代码，并保存为float.html。  </li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">title</span>&gt;</span>Floating<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">     <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"p1"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"span-a"</span>&gt;</span>Lorem ipsum<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"span-b"</span>&gt;</span>dolor sit amet<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"span-c"</span>&gt;</span>consectetuer<span class="tag">&lt;/<span class="name">span</span>&gt;</span> adipiscing elit.</div><div class="line">       Curabitur feugiat feugiat purus.</div><div class="line">       Aenean eu metus. Nulla facilisi.</div><div class="line">       Pellentesque quis justo vel massa suscipit sagittis.</div><div class="line">       Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos.</div><div class="line">       Quisque mollis, justo vel rhoncus aliquam, urna tortor varius lacus, ut tincidunt metus arcu vel lorem.</div><div class="line">       Praesent metus orci, adipiscing eget, fermentum ut, pellentesque non, dui.</div><div class="line">       Sed sagittis, metus a semper dictum, sem libero sagittis nunc, vitae adipiscing leo neque vitae tellus.</div><div class="line">       Duis quis orci quis nisl nonummy dapibus.</div><div class="line">       Etiam ante. Phasellus imperdiet arcu at odio.</div><div class="line">       In hac habitasse platea dictumst. Aenean metus.</div><div class="line">       Quisque a nibh. Morbi mattis ullamcorper ipsum.</div><div class="line">       Nullam odio urna, feugiat sed, bibendum sed, vulputate in, magna.</div><div class="line">       Nulla tortor justo, convallis iaculis, porta condimentum, interdum nec, arcu.</div><div class="line">       Proin lectus purus, vehicula et, cursus ut, nonummy et, diam.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"> </div><div class="line">       <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"p2"</span>&gt;</span>Nunc ac elit. Vestibulum placerat dictum nibh. Proin massa.</div><div class="line">       Curabitur at lectus egestas quam interdum mollis.</div><div class="line">       Cras id velit a lacus sollicitudin faucibus.</div><div class="line">       Proin at ante id nisi porttitor scelerisque.</div><div class="line">       In metus. Aenean nonummy semper enim.</div><div class="line">       Aenean tristique neque quis arcu tincidunt auctor.</div><div class="line">       Fusce consequat auctor ligula.</div><div class="line">       Fusce nulla lorem, sagittis a, lacinia et, nonummy in, eros.</div><div class="line">       In nisi augue, aliquam eget, convallis vel, malesuada quis, libero.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"> </div><div class="line">       <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"p3"</span>&gt;</span>Hello, World!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">     <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这里有大量的内容，但是我们需要一些东西来展示这是怎么工作的。  </p>
+<ul>
+<li>在浏览器中打开文档看看长什么样。无聊，是不是？</li>
+<li>在你编辑器中新建另一个文档，用下面的代码填充它，保存为style.css并放在第一步的HTML文件同一个文件夹下。  </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#span-a</span> &#123;</div><div class="line">   <span class="attribute">float</span>: left;</div><div class="line">   <span class="attribute">background-color</span>: <span class="number">#cfc</span>;</div><div class="line">   <span class="attribute">color</span>: <span class="number">#030</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>通过在标签前插入下列代码来将样式表链接到HTML文档中：  </li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"style.css"</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>保存并在浏览器中刷新页面。你会发现包含单词“Lorem ipsum”的<code>span</code>元素向左浮动了。同时我给了一个浅绿色背景让它看起来显眼一点。</li>
+<li>这里发生了什么仍不容易看出来，因此让我们的浮动元素变得更大一点。在你的样式表中增加下面的声明：  </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#span-a</span> &#123;</div><div class="line">   <span class="attribute">float</span>: left;</div><div class="line">   <span class="attribute">background-color</span>: <span class="number">#cfc</span>;</div><div class="line">   <span class="attribute">color</span>: <span class="number">#030</span>;</div><div class="line">   <span class="attribute">padding</span>: <span class="number">1em</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>保存并刷新，你会看到绿色区域更大了，因为我们往盒子的四边增加了一点内边距。浮动元素和三行文字一样高，我们可以清晰地看到其它文本流动在浮动元素周围。</li>
+</ul>
+<h3 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h3><p>现在我将进一步详细分析这里发生了什么。由第一个<code>span</code>元素生成的这个浮动盒子往左移动，一直到文档的边缘，并且它旁边的行框被缩短了。  </p>
+<p>虽然不容易看到，但由包含这个浮动元素的段落所生成的块级盒子是不受影响的。让我们将段落高亮以便看得更清楚。 </p>
+<ul>
+<li>增加另一个CSS规则到样式表，如下：  </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span> &#123;</div><div class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#f00</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>再一次保存css文件并刷新，你现在应该可以看到每一个段落所包围的红色边框——注意浮动元素停留在其中一个段落中。</li>
+<li>让我们改变刚刚的规则，确认浮动元素停留在父元素内边距的内边缘：  </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span> &#123;</div><div class="line">   <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#f00</span>;</div><div class="line">   <span class="attribute">padding</span>: <span class="number">1em</span>;</div><div class="line">   <span class="attribute">background-color</span>: <span class="number">#ff9</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>保存刷新，你会看到我之前所说东西的证明：浮动盒子移动到它的包含块的边缘，而父元素的内边距在其外边。你也会看到段落的黄色背景铺展在浮动盒子之下。<strong>浮动一个子元素盒子显然不会影响段落盒子本身，而仅仅是里面的行框。</strong></li>
+<li>让我们再实验一下——如果浮动元素比它的父元素更高会怎么样呢？改变浮动元素的规则如下：  </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#span-a</span> &#123;</div><div class="line">   <span class="attribute">float</span>: left;</div><div class="line">   <span class="attribute">background-color</span>: <span class="number">#cfc</span>;</div><div class="line">   <span class="attribute">color</span>: <span class="number">#030</span>;</div><div class="line">   <span class="attribute">padding</span>: <span class="number">1em</span> <span class="number">1em</span> <span class="number">10em</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>注意：如果你使用的是一个窄的浏览器窗口，你也许需要使用大于10em的底部内边距值来使绿色背景超过段落的下边框。你现在会看到一些有趣的事情：浮动盒子突出在父级块级盒子的外面；父盒子没有扩大以包含它的浮动子盒子。你也能发现（如果你设置了足够大的底部内边距）第二段里面的挨着浮动盒子的那些行框也缩短了（见译注图1）。  </p>
+<p><img src="/upload/articles/Floats_and_clearing-t1.png" alt="aierwa" title="译注图1">  </p>
+<h3 id="更多的浮动盒子"><a href="#更多的浮动盒子" class="headerlink" title="更多的浮动盒子"></a>更多的浮动盒子</h3><p>让我们创建另一个浮动来看看当两个元素同时向一个方向浮动时会发生什么。</p>
+<ul>
+<li>向你的样式表中增加一个新规则并如前一样保存刷新：  </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#span-b</span> &#123;</div><div class="line">   <span class="attribute">float</span>: left;</div><div class="line">   <span class="attribute">background-color</span>: <span class="number">#ccf</span>;</div><div class="line">   <span class="attribute">color</span>: <span class="number">#003</span>;</div><div class="line">   <span class="attribute">padding</span>: <span class="number">1em</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>现在包含单词“dolor sit amet”的<code>span</code>元素也向左浮动了。你会看到它往左移动直到碰到第一个浮动元素；换句话说，就是“尽可能远”。</p>
+<ul>
+<li>为什么只满足两个浮动元素呢？让我们来创建第三个——增加下面规则到样式表：  </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#span-c</span> &#123;</div><div class="line">   <span class="attribute">float</span>: left;</div><div class="line">   <span class="attribute">background-color</span>: <span class="number">#fcc</span>;</div><div class="line">   <span class="attribute">color</span>: <span class="number">#300</span>;</div><div class="line">   <span class="attribute">padding</span>:<span class="number">2em</span> <span class="number">1em</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>我仍然需要你添加一个临时规则来看个例子，即当一行中没有足够空间放下一个浮动盒子时会发生什么。增加如下规则在样式表的最后：  </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">span</span> &#123;</div><div class="line">   <span class="attribute">width</span>: <span class="number">34%</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>像之前的一样保存和刷新——你会看到如图3所示的一样。  </li>
+</ul>
+<p><img src="/upload/articles/Floats_and_clearing-3.png" alt="aierwa" title="Figure 3: Not quite what you respect?"> </p>
+<p>哇！刚刚发生了什么？第三个浮动盒子出现在了第二个的下面！（IE6会奇怪些，我们此时不讨论）因为每一个<code>span</code>元素的宽度都是段落宽度的34%（由第3步的规则指定的），再加上一些内边距，所有的三个浮动盒子边靠边布置就没有足够空间了（3x34%=102%）。前两个浮动盒子可以在一行中，第三个不能因而往下移动。重要的是它仅仅移动它需要移动的距离，它没有移动到第一个高的浮动盒子下面，因为其右边已经有空间了。  </p>
+<p>另一个值得注意的有趣现象是你为<code>span</code>元素指定了宽度。这原本不应该起作用的，因为<code>span</code>元素是一个行内元素。然而，浮动一个盒子会自动将之变为一个块级盒子，这意味着我们<strong>可以为它设置尺寸和垂直外边距margin。</strong></p>
+<h3 id="浮动元素中的外边距margin"><a href="#浮动元素中的外边距margin" class="headerlink" title="浮动元素中的外边距margin"></a>浮动元素中的外边距margin</h3><p>现在我们来探究你可以对浮动元素的margin做些什么。</p>
+<ul>
+<li>首先，删除前面为<code>span</code>元素添加的临时规则，保存并刷新，于是我们的三个浮动盒子再一次边靠边排列了。即删除这个规则：  </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">span</span> &#123;</div><div class="line">   <span class="attribute">width</span>: <span class="number">34%</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>现在浮动盒子紧紧地堆在一起，旁边的文本紧随着最后一个浮动元素的后面（除非你在用IE6甚至更老的版本，这种情况下由于<a href="http://positioniseverything.net/explorer/threepxtest.html" target="_blank" rel="external">三像素文本bug</a>会在右边有一个3px的空隙）。你如何能在一个浮动盒子周围增加一些空间？答案就是<strong>margins</strong>。  </p>
+<ul>
+<li>让我们在中间那个浮动盒子上试一下——改变它的CSS规则，保存刷新：  </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#span-b</span> &#123;</div><div class="line">   <span class="attribute">float</span>: left;</div><div class="line">   <span class="attribute">background-color</span>: <span class="number">#ccf</span>;</div><div class="line">   <span class="attribute">color</span>: <span class="number">#003</span>;</div><div class="line">   <span class="attribute">padding</span>: <span class="number">1em</span>;</div><div class="line">   <span class="attribute">margin-left</span>: <span class="number">1em</span>;</div><div class="line">   <span class="attribute">margin-right</span>: <span class="number">1em</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>是的，现在中间浮动盒子的两边都有了一些空间了。</p>
+<ul>
+<li>你也可以在浮动元素上设置垂直margin——在第三个浮动盒子上应用如下规则：  </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#span-c</span> &#123;</div><div class="line">   <span class="attribute">float</span>: left;</div><div class="line">   <span class="attribute">background-color</span>: <span class="number">#fcc</span>;</div><div class="line">   <span class="attribute">color</span>: <span class="number">#300</span>;</div><div class="line">   <span class="attribute">padding</span>:<span class="number">2em</span> <span class="number">1em</span>;</div><div class="line">   <span class="attribute">margin-top</span>: <span class="number">2em</span>;</div><div class="line">   <span class="attribute">margin-bottom</span>: <span class="number">2em</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>这会使第三个浮动盒子往下移动并且在它下面会存在一些多余的空间。</p>
+<ul>
+<li>由于我们现在是在冒险中，就让我们看看使用负margin会出现什么吧！对第三个浮动盒子应用如下规则：  </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#span-c</span> &#123;</div><div class="line">   <span class="attribute">float</span>: left;</div><div class="line">   <span class="attribute">background-color</span>: <span class="number">#fcc</span>;</div><div class="line">   <span class="attribute">color</span>: <span class="number">#300</span>;</div><div class="line">   <span class="attribute">padding</span>:<span class="number">2em</span> <span class="number">1em</span>;</div><div class="line">   <span class="attribute">margin-top</span>: <span class="number">2em</span>;</div><div class="line">   <span class="attribute">margin-bottom</span>: <span class="number">2em</span>;</div><div class="line">   <span class="attribute">margin-left</span>: -<span class="number">4em</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>你会看到图4这样。  </p>
+<p><img src="/upload/articles/Floats_and_clearing-4.png" alt="aierwa" title="Figure 4: You&#39;ll now see floats on top of one another!"> </p>
+<p>怎么样？谁说浮动盒子不能出现在另一个浮动盒子的上面？注意负左margin是怎样往左移动整个浮动盒子的。  </p>
+<p>对浮动元素使用负margin在某些多栏布局中可能会非常有用。</p>
+<h2 id="清除"><a href="#清除" class="headerlink" title="清除"></a>清除</h2><p>既然我已经涵盖了浮动的基础了，现在我将转移到非常相近的一个话题——清除。  </p>
+<p>正如你在这篇文章中看到的那些例子，<strong>文本会围绕浮动元素流动，块级盒子不受浮动元素影响。</strong>有时，最好确保元素不会与浮动盒子相邻。比如，引入文章新部分的标题不应该出现在上一部分的图片旁边。你更愿意将标题放在图片下面，即使图片突出在最后一段下面。做到这点的唯一方法就是给标题加属性<code>clear</code>。  </p>
+<p>另一个例子就是无所不在的带一个全宽页脚的三列布局。如果列都被浮动了，你可以给页脚加<code>clear</code>属性来保证它出现在所有列的下面——无论哪一列最长。  </p>
+<p>属性<code>clear</code>有三个有用的值：<em>left，right</em>和<em>both</em>。值<em>none</em>（默认）和<em>inherit</em>也是合法的。  </p>
+<p>对元素使用<code>clear: left</code>意味着保证生成的盒子其左侧的任何先前浮动的盒子之下显示。如果使用<code>clear: both</code>，它将出现在任何一边之前浮动的盒子的下面。  </p>
+<p>有必要的话会通过将元素向下移动（在它的上外边距上面增加空白空间）来实现清除，直到其上边界在所有浮动盒子的下边界之下。让我们通过例子进一步阐明。</p>
+<ul>
+<li>在此之前，让我们清理下你的样式表。移除<code>#span-b</code>和<code>#span-c</code>的样式以便你只有左边的绿色浮动盒子，并确保它有足够大的下内边距（bottom padding）以至能扩展到第二个段落里面去。</li>
+<li>给第二个段落增加如下规则，保存并刷新：  </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#p2</span> &#123;</div><div class="line">   <span class="attribute">clear</span>: left;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>看吧！第二段向下移动直到清除干净了这个浮动盒子，如图5。  </p>
+<p><img src="/upload/articles/Floats_and_clearing-5.png" alt="aierwa" title="Figure 5: The second paragraph is now cleared below the first one."></p>
+<p>为了让事情变得复杂起来，我们可以为同一个元素应用<code>float</code>和<code>clear</code>。</p>
+<ul>
+<li>为第二个浮动盒子增加规则让其清除掉第一个浮动盒子，然后保存刷新：  </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#span-b</span> &#123;</div><div class="line">   <span class="attribute">float</span>: left;</div><div class="line">   <span class="attribute">clear</span>: left;</div><div class="line">   <span class="attribute">padding</span>: <span class="number">1em</span>;</div><div class="line">   <span class="attribute">background-color</span>: <span class="number">#ccf</span>;</div><div class="line">   <span class="attribute">color</span>: <span class="number">#003</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>蓝色的浮动盒子现在出现在了绿色浮动盒子之下，完全移出了父段落。由于它向左边浮动，第二个段落继续往下移动以进一步清除它（见译注图2）。  </p>
+<p><img src="/upload/articles/Floats_and_clearing-t2.png" alt="aierwa" title="译注图2"></p>
+<h2 id="包含浮动元素"><a href="#包含浮动元素" class="headerlink" title="包含浮动元素"></a>包含浮动元素</h2><p>上面已经看出，父元素盒子并不会自动扩大去包含浮动的子元素。这可能会导致混乱，比如当通过浮动无序列表里面所有的<code>li</code>元素来制作一个水平菜单时，元素的所有子元素都将被浮动。因为浮动盒子会从流中抽出并且不会影响父元素，所以浮动所有子元素会使得父元素为空，且其高度将坍塌至0。有时这是不可取的，比如若你想要给父元素设置一个背景，如果父元素高度为0，就不会显示背景。  </p>
+<p>显然我们需要某种机制来让父元素能扩大以囊括它的浮动子元素。传统的方法是在父元素结束标签之前添加一个额外的元素并设置为<code>clear:both</code>（译者注：此时这个元素会出现在浮动元素下面，以撑开父元素）。这是有用的，但相当让人难受，因为这会额外引入一个不必要的标签。所幸，这里我们还会讨论其他方法。  </p>
+<p><strong>第一个方法就是简单地也浮动父元素</strong>。浮动元素将一直扩大去包括它的浮动子元素。</p>
+<ul>
+<li>在示例文档中试一试，再一次删除<code>#span-b</code>的规则，保存刷新之前像这样浮动第一个段落：  </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#p1</span> &#123;</div><div class="line">   <span class="attribute">float</span>: left;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>段落现在扩展直至能包含绿色浮动盒子。这一切都很好，但有时浮动父元素并不是个好选项。另一个避免浮动父元素的方法是给其<strong>设置除<code>visible</code>以外的其他<code>overflow</code>属性值。</strong>如果设为<code>hidden</code>并且不指定高度，父元素就可以包括浮动子元素。</p>
+<ul>
+<li>用这个代替上一个规则，保存刷新：  </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#p1</span> &#123;</div><div class="line">   <span class="attribute">overflow</span>: hidden;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>注意后一个方法在IE6-中无效。</p>
+<h2 id="收缩包装（Shrink-wrapping）"><a href="#收缩包装（Shrink-wrapping）" class="headerlink" title="收缩包装（Shrink-wrapping）"></a>收缩包装（Shrink-wrapping）</h2><p>前面提到过<strong>浮动行内元素会使其变为块级元素，由此允许我们对其设置尺寸和垂直margin</strong>。浮动块级元素有一个令人惊讶的结果：如果没有指定宽度，盒子将会“收缩包装”以适应它的内容。这个现象在本例文档中当浮动第一个段落时是不可见的，因为它有足够的内容去填充整个窗口（除非你有一个相当宽的显示器）。  </p>
+<p>让我们浮动最后一个段落来看看效果吧。其实为了具有一些变化，我们可以更疯狂地将之浮动到右边！  </p>
+<p>增加如下规则到样式表，保存刷新：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#p3</span> &#123;</div><div class="line">  <span class="attribute">float</span>: right;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>“Hello, World”段落现在往右边浮动，其宽度为文本再加上之前为所有段落指定的内边距值之和的宽度。  </p>
+<h2 id="居中浮动元素"><a href="#居中浮动元素" class="headerlink" title="居中浮动元素"></a>居中浮动元素</h2><p>有时你想浮动一个元素——或许是为了让其包裹它的浮动子元素——同时需要将之放在居中的位置。这时会出现一个问题：你不能常规地设置浮动元素的左右margin为auto，也没有类似<code>float:center</code>这类值。有没有办法解决这个问题呢？  </p>
+<p>事实上是有的。CSS大师 Paul O’Brien 在其文章 <a href="http://www.search-this.com/2007/09/19/when-is-a-float-not-a-float/" target="_blank" rel="external">When is a float not a float?</a> 阐明了怎么做。它涉及一个额外的包装元素。原理中使用了相对定位，这将在下一篇文章中涉及。通过往右移动包装元素，接着移动浮动元素到左边，你实际上就居中了一个未知宽度且收缩包装的浮动元素！（你可以在接下来的日子里打动你的伙伴，永远不会失败的。）  </p>
+<p>让我们来试试。接下来的例子里你将基于浮动无序列表项来往你的页面中添加一个水平菜单栏。</p>
+<ul>
+<li>在HTML文档中紧随<code>&lt;body&gt;</code>标签的地方插入下面的标记：  </li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrap"</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"menu"</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>News<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Products<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Services<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"> </div><div class="line"> <span class="comment">&lt;!--Internet Explorer needs this--&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clear"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>给菜单添加样式：  </p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#menu</span> &#123;</div><div class="line">   <span class="attribute">margin</span>: <span class="number">0</span>;</div><div class="line">   <span class="attribute">padding</span>: <span class="number">0.5em</span>;</div><div class="line">   <span class="attribute">font-family</span>: Verdana,sans-serif;</div><div class="line"> &#125;</div><div class="line"> </div><div class="line"> <span class="selector-id">#menu</span> <span class="selector-tag">li</span> &#123;</div><div class="line">   <span class="attribute">float</span>: left;</div><div class="line">   <span class="attribute">list-style-type</span>: none;</div><div class="line">   <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0.5em</span>;</div><div class="line">   <span class="attribute">padding</span>: <span class="number">0.25em</span>;</div><div class="line">   <span class="attribute">background-color</span>: <span class="number">#600</span>;</div><div class="line">   <span class="attribute">color</span>: <span class="number">#ff9</span>;</div><div class="line">   <span class="attribute">border</span>: <span class="number">2px</span> solid <span class="number">#f00</span>;</div><div class="line"> &#125;</div><div class="line"> </div><div class="line"> <span class="selector-id">#menu</span> <span class="selector-tag">a</span> &#123;</div><div class="line">   <span class="attribute">color</span>: <span class="number">#ff9</span>;</div><div class="line">   <span class="attribute">text-decoration</span>: none;</div><div class="line"> &#125;</div><div class="line"> </div><div class="line"> <span class="selector-class">.wrap</span> &#123;</div><div class="line">   <span class="attribute">float</span>: left;</div><div class="line">   <span class="attribute">margin-bottom</span>: <span class="number">2em</span>;</div><div class="line"> &#125;</div><div class="line"> </div><div class="line"> <span class="selector-class">.clear</span> &#123;</div><div class="line">   <span class="attribute">clear</span>: left;</div><div class="line">   <span class="attribute">height</span>: <span class="number">1px</span>;</div><div class="line">   <span class="attribute">margin-top</span>: -<span class="number">1px</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>保存两个文件并刷新浏览器，你的菜单出现在了左上角。让我们来水平居中它！</li>
+<li>修改<code>.wrap</code>的规则以将包装元素移到页面的中间：  </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.wrap</span> &#123;</div><div class="line">   <span class="attribute">float</span>: left;</div><div class="line">   <span class="attribute">margin-bottom</span>: <span class="number">2em</span>;</div><div class="line">   <span class="attribute">position</span>: relative;</div><div class="line">   <span class="attribute">left</span>: <span class="number">50%</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>你的菜单将从页面的水平中心开始，但那并非我们所想要的——它太靠右了，因此你需要把它往左边回移一点点。由于你浮动了包装元素，它会收缩尺寸以适合列表的大小。你想要移动列表其自身一半宽度的距离，这也恰好是包装元素的的半宽长度，所以你可以移动列表-50%。  </p>
+<ul>
+<li>修改<code>#menu</code>的规则：  </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#menu</span> &#123;</div><div class="line">   <span class="attribute">margin</span>: <span class="number">0</span>;</div><div class="line">   <span class="attribute">padding</span>: <span class="number">0.5em</span>;</div><div class="line">   <span class="attribute">font-family</span>: Verdana,sans-serif;</div><div class="line">   <span class="attribute">position</span>: relative;</div><div class="line">   <span class="attribute">left</span>: -<span class="number">50%</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>菜单现在居中了（见译注图3）。  </p>
+<p><img src="/upload/articles/Floats_and_clearing-t3.png" alt="aierwa" title="译注图3"></p>
+<p>唯一的问题是菜单可能会出现一个水平滚动条，这取决于列表和浏览器窗口的宽度。因为你移动了包装元素一半屏幕的宽度；如果列表比半屏更宽，它的一部分最终将会在屏幕外。  </p>
+<p>你可以通过在合适的父元素上设置<code>overflow:hidden</code>来摆脱这个问题。这个案例中包装元素的父元素是<code>body</code>。有时候在<code>body</code>上隐藏溢出并不合适，这种情况下你需要包装元素的包装元素，这样做还不错。增加如下规则：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span> &#123;</div><div class="line">   <span class="attribute">overflow</span>: hidden;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>其实还有一个问题，IE中仍没有正确工作。解决方法是浮动列表本身，但只能在IE中，因为这会打破其他浏览器的规则。你可以使用一点小hack就能确保仅有IE应用这个规则（译者注：此hack只对IE6有效）：  </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">* <span class="selector-tag">html</span> <span class="selector-id">#menu</span> &#123;</div><div class="line">   <span class="attribute">float</span>: left;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h2 id="Bugs！"><a href="#Bugs！" class="headerlink" title="Bugs！"></a>Bugs！</h2><p>浮动和清除非常有用，但不幸的是大多数——如果不是所有的——浏览器对这些属性都有一些错误的实现。IE6拥有奇怪的浮动行为排列，包括文本消失，双倍margin和臭名昭著的3像素空隙。但是当涉及到浮动和清除时，Firefox和Opera甚至完全不会出错。<a href="http://positioniseverything.net/" target="_blank" rel="external">Position Is Everything</a>是一个记录这些bug的无价资源之处，还有大多数情况下的解决方案。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>浮动一个盒子使其在父元素里面尽可能远地向左或向右移动。浮动盒子从文档流中抽出并且不会影响其父元素框或随后的块级元素框，尽管行框被缩短了。当由于前面浮动盒子的原因导致一行中没有多余的空间再放下一个浮动盒子时，它会下移以适合放置（或直至没有其他浮动盒子）。  </p>
+<p>浮动行内元素会使其变为块级盒子。浮动块级盒子且无确定宽度时它会收缩包装以适合其内容。清除浮动意味着内容往下移，如果需要的话，一直移到内容的上边界在所有浮动盒子下边界之下为止。  </p>
+<p>可以通过增添包装元素以及恰当地使用相对定位来居中收缩包装了的浮动盒子。  </p>
+<h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><ul>
+<li>浮动一个段落中位于中间的元素为发生什么？即在浮动元素之前还有文本内容。确保在不同浏览器中尝试下，因为它们表现各异。Opera和Safari会表现正常，而Firefox和IE不会。（<em>译者注：浮动盒子上边界不会超过前面文本最后一个行框的上边界？</em>）</li>
+<li>在不使用表格布局的情况下，如何使用浮动来在相同大小的“单元格”的图库中显示图像缩略图。</li>
+<li>你如何实现页面左侧的垂直导航菜单和右侧的内容列，同时菜单下面没有文本内容？</li>
+<li>一个非常常见的web站点布局具有全宽的头部，紧接着的三个内容列和随后底部的全宽页脚。你怎样通过浮动和布局实现这个布局？</li>
+</ul>
+<p>注意：这篇材料作为Opera web标准课程的一部分原创发表，由Tommy Olsson撰写。和其他原创一样，具有Creative Commons Attribution, Non Commercial - Share Alike 2.5证书。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSS/" rel="tag"># CSS</a>
+          
+            <a href="/tags/翻译/" rel="tag"># 翻译</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/31/我的博客/" rel="next" title="我的博客">
+                <i class="fa fa-chevron-left"></i> 我的博客
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/upload/avatar.jpg"
+               alt="Aierwa" />
+          <p class="site-author-name" itemprop="name">Aierwa</p>
+           
+              <p class="site-description motion-element" itemprop="description">中不偏，庸不易</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/aierwa" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浮动和清除到底是什么？"><span class="nav-number">2.</span> <span class="nav-text">浮动和清除到底是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些无聊的理论"><span class="nav-number">3.</span> <span class="nav-text">一些无聊的理论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浮动是怎样起作用的？"><span class="nav-number">4.</span> <span class="nav-text">浮动是怎样起作用的？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#细节"><span class="nav-number">4.1.</span> <span class="nav-text">细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更多的浮动盒子"><span class="nav-number">4.2.</span> <span class="nav-text">更多的浮动盒子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浮动元素中的外边距margin"><span class="nav-number">4.3.</span> <span class="nav-text">浮动元素中的外边距margin</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#清除"><span class="nav-number">5.</span> <span class="nav-text">清除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#包含浮动元素"><span class="nav-number">6.</span> <span class="nav-text">包含浮动元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#收缩包装（Shrink-wrapping）"><span class="nav-number">7.</span> <span class="nav-text">收缩包装（Shrink-wrapping）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#居中浮动元素"><span class="nav-number">8.</span> <span class="nav-text">居中浮动元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bugs！"><span class="nav-number">9.</span> <span class="nav-text">Bugs！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">10.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思考题"><span class="nav-number">11.</span> <span class="nav-text">思考题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aierwa</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
