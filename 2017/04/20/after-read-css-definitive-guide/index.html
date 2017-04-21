@@ -1,0 +1,973 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CSS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="今年快毕业了，意味着牛上架子的时间快来了，可自觉功夫尚浅，想来好多该学的没学，该深入的没深入，前端的坑怎么填呢？三月份买了两本书——《CSS权威指南》和《你不知道的JavaScript》。希望能尽快看完。  
+陆陆续续花了功夫把《CSS权威指南》过了一遍，收获颇多。虽然这是一本07年出版的书，但都是必备的基础啊，基础很重要，基础很重要。以前只知道CSS是展示页面的，但没想到其作用举足轻重，也更体会">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【阅读笔记】CSS权威指南">
+<meta property="og:url" content="http://yoursite.com/2017/04/20/after-read-css-definitive-guide/index.html">
+<meta property="og:site_name" content="Aierwa | 平凡之路">
+<meta property="og:description" content="今年快毕业了，意味着牛上架子的时间快来了，可自觉功夫尚浅，想来好多该学的没学，该深入的没深入，前端的坑怎么填呢？三月份买了两本书——《CSS权威指南》和《你不知道的JavaScript》。希望能尽快看完。  
+陆陆续续花了功夫把《CSS权威指南》过了一遍，收获颇多。虽然这是一本07年出版的书，但都是必备的基础啊，基础很重要，基础很重要。以前只知道CSS是展示页面的，但没想到其作用举足轻重，也更体会">
+<meta property="og:image" content="http://yoursite.com/upload/articles/after-read-css-definitive-guide.jpg">
+<meta property="og:updated_time" content="2017-04-21T02:09:40.184Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【阅读笔记】CSS权威指南">
+<meta name="twitter:description" content="今年快毕业了，意味着牛上架子的时间快来了，可自觉功夫尚浅，想来好多该学的没学，该深入的没深入，前端的坑怎么填呢？三月份买了两本书——《CSS权威指南》和《你不知道的JavaScript》。希望能尽快看完。  
+陆陆续续花了功夫把《CSS权威指南》过了一遍，收获颇多。虽然这是一本07年出版的书，但都是必备的基础啊，基础很重要，基础很重要。以前只知道CSS是展示页面的，但没想到其作用举足轻重，也更体会">
+<meta name="twitter:image" content="http://yoursite.com/upload/articles/after-read-css-definitive-guide.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/20/after-read-css-definitive-guide/"/>
+
+
+
+
+
+  <title> 【阅读笔记】CSS权威指南 | Aierwa | 平凡之路 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aierwa | 平凡之路</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-slide">
+          <a href="/slide" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-photo"></i> <br />
+            
+            幻灯片
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/20/after-read-css-definitive-guide/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aierwa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/upload/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aierwa | 平凡之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【阅读笔记】CSS权威指南
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-20T10:04:32+08:00">
+                2017-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/upload/articles/after-read-css-definitive-guide.jpg" alt="aierwa"><br>今年快毕业了，意味着牛上架子的时间快来了，可自觉功夫尚浅，想来好多该学的没学，该深入的没深入，前端的坑怎么填呢？<br>三月份买了两本书——《CSS权威指南》和《你不知道的JavaScript》。希望能尽快看完。  </p>
+<p>陆陆续续花了功夫把《CSS权威指南》过了一遍，收获颇多。虽然这是一本07年出版的书，但都是必备的基础啊，基础很重要，基础很重要。以前只知道CSS是展示页面的，但没想到其作用举足轻重，也更体会到为何HTML会删除诸如<code>&lt;i&gt;</code>的样式标签。逛CSS禅意花园，还真是乱花渐欲迷人眼，更别说CSS3这尊神了。<br><a id="more"></a><br>如今再翻一遍这本书，把笔记做个总结，便以查阅。  </p>
+<h2 id="关于CSS"><a href="#关于CSS" class="headerlink" title="关于CSS"></a>关于CSS</h2><h3 id="历史、版本"><a href="#历史、版本" class="headerlink" title="历史、版本"></a>历史、版本</h3><p>Web的早期，几乎是HTML的一己之力，内容，显示，交互等都一手操办。但当web喷涌的时候，HTML力不从心了，从此诞生了CSS和JS。<br>以前控制样式都是通过HTML标签来实现的，如<code>&lt;font&gt;</code>控制字体。页面内容增加后，开始冗杂，非结构化，难以维护。<br>于是先是两三个人商量着如何解决这个问题，然后成立一个工作组（W3C组织里面），开始研究、制定草案。  </p>
+<p>从1994年提出层叠样式表（Cascading Style Sheets，CSS），到1996年年底，工作组完成了第一份正式标准，即CSS1。目前来说CSS1已经被认为是过时的了。<br>（<strong>注意：</strong>CSS没有传统意义的版本说法，而是“级别/水平”（levels），更高级别的CSS是低级别CSS的超集。CSS1即为CSS Level 1，CSS3即为CSS Level 3。）  </p>
+<p>1998年CSS2就出来了，在CSS2的实施实践过程中，工作组发现规范中的诸多问题，于是选择定义CSS Level 2 Revision 1（CSS2.1）。也就是说，CSS2.1是CSS2的修订版，如果两个版本之间有任何冲突，CSS2.1会有明确的定义。<strong>现在使用最广泛的就是CSS2.1。</strong>  </p>
+<p>CSS3以CSS2.1规范作为核心，在CSS2模块基础上按模块建立。也就是说，CSS3是按各属性模块分别定义的，比如颜色模块，边框模块，动画模块等，<strong>“CSS3”这个术语仅用来区别之前的单一模块版本。</strong>如果CSS2中没有相关模块就从level 1开始，比如<em>CSS Transforms Module Level 1</em>，<em>Selectors API Level 1</em>；如果CSS2中有的模块就从level 3开始，乃至4或更高，比如<em>Selectors Level 3</em>，<em>Media Queries Level 4</em>。当然，这些模块有些已经完成并在推荐阶段，有些在草案阶段。由于是模块单独建立，所以<em>Selectors Level 4</em>是有可能在<em>CSS Line Module Level 3</em>之前完成的。随着每个模块的完成，它们将被插到现有的CSS2.1系统中。  </p>
+<p>CSS4，如前所述，CSS3已经是按模块来定义了，所以哪里有什么CSS Level 4啊！  </p>
+<p>（这和ECMAScript版本不一样呀！）</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>事实证明，CSS是成功的。关于样式几乎无所不能，以前HTML能做的CSS能做，不能做的CSS也能做，而且还很方便。对于XML标记当然也能用CSS设置样式。  </p>
+<p><strong>关联文档：</strong></p>
+<ul>
+<li><p>外部链接：  </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;link rel="stylesheet" type="text/css" href="style.css" media="all" &gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>style元素：  </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;style type="text/css"&gt;</div><div class="line">    h1 &#123;color: gray;&#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>@import：  </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;style type="text/css"&gt;</div><div class="line">    @import url(sheet2.css);</div><div class="line">    h1 &#123;color: gray;&#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>注意：<code>@import</code>只能放在<code>style</code>元素里面，且放在最前！不能在一个单独css文件里使用。  </p>
+<ul>
+<li>内联  </li>
+</ul>
+<p><strong>注释</strong>：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*单行注释*/</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 多行注释</div><div class="line"> */</div></pre></td></tr></table></figure></p>
+<h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><p>选择器是CSS的核心，要对文档应用样式，首先就得定位元素。  </p>
+<h3 id="哪些选择器？"><a href="#哪些选择器？" class="headerlink" title="哪些选择器？"></a>哪些选择器？</h3><p><strong>通配符</strong>： <code>*</code><br>    适配所有元素</p>
+<p><strong>ID选择器</strong>： <code>#span-1</code>  </p>
+<p><strong>类选择器</strong>： <code>.center</code><br>    <code>.urgent.warning</code> 指同时包含这两个值的元素。（<em>IE7-不支持</em>）  </p>
+<p><strong>元素选择器</strong>： <code>div</code>  <code>div,p</code>  </p>
+<p><strong>后代选择器</strong>： <code>div p</code>  </p>
+<p><strong>子选择器</strong>： <code>div &gt; p</code><br>    <strong>注意：查找顺序是从右至左！</strong>  </p>
+<p><strong>属性选择器</strong>：  </p>
+<ul>
+<li>含某属性： <code>a[href]</code>  <code>p[class]</code>  <code>*[title]</code>  <code>a[href][title]</code></li>
+<li>具体属性： <code>a[href=&quot;aierwa.github.io&quot;]</code>  <code>p[class=&quot;urgent&quot;]</code><br>  即class属性值等于urgent的p元素，“urgent red”这种不行！</li>
+<li>部分属性值： <code>p[class~=&quot;urgent&quot;]</code><br>  具有class值“urgent”的p，“urgent red”这种也能匹配，等价于<code>.urgent</code>。  </li>
+<li>开始子串属性值： <code>p[class^=&quot;test-&quot;]</code>  (css3)  </li>
+<li>结束子串属性值： <code>a[href$=&quot;.pdf&quot;]</code> (css3)</li>
+<li>任意子串属性值： <code>a[href*=&quot;port&quot;]</code>  (css3)  </li>
+</ul>
+<p><strong>相邻兄弟选择器</strong>： <code>h1 + p</code>  </p>
+<p><strong>伪类/伪元素选择器</strong>： <code>:link</code>  <code>:visited</code>  <code>:focus</code>  <code>:hover</code>  <code>:active</code>  <code>:first-child</code>  <code>:first-letter</code>  <code>:first-line</code>  <code>:lang(fr)</code>  <code>:before</code>  <code>:after</code><br>    链接a的顺序：LVHA  </p>
+<h3 id="选择器的特殊性"><a href="#选择器的特殊性" class="headerlink" title="选择器的特殊性"></a>选择器的特殊性</h3><p>特殊性是为了计算出一个选择器的优先顺序，表述为4个部分：0，0，0，0<br>一个ID，加0，1，0，0<br>一个类、属性或伪类，加0，0，1，0<br>一个元素或伪元素，加0，0，0，1<br>通配符<code>*</code>无特殊性，加0，0，0，0  </p>
+<p>高者胜，如：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">h2</span><span class="selector-class">.grape</span> &#123;<span class="attribute">color</span>: red;&#125; <span class="comment">/* 0,0,1,1 winner */</span></div><div class="line"><span class="selector-tag">h2</span> &#123;<span class="attribute">color</span>: blue;&#125; <span class="comment">/* 0,0,0,1 */</span></div></pre></td></tr></table></figure></p>
+<p>重要声明<code>!important</code>总是胜出。  </p>
+<p>继承的属性根本没有特殊性，<strong>甚至连0特殊性都没有。</strong><br>所以这里会延伸出一个问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">* &#123;color: gray;&#125;</div><div class="line">#head &#123;color: black;&#125;</div><div class="line"></div><div class="line">&lt;h1 id=&quot;head&quot;&gt;</div><div class="line">  &lt;span&gt; click &lt;/span&gt;</div><div class="line">  &lt;em&gt; me! &lt;/em&gt;</div><div class="line">&lt;/h1&gt;</div></pre></td></tr></table></figure></p>
+<p><code>em</code>会呈现灰色！这就是不加区别的使用通配符可能存在的问题之一。  </p>
+<h3 id="补充：CSS3选择器"><a href="#补充：CSS3选择器" class="headerlink" title="补充：CSS3选择器"></a>补充：CSS3选择器</h3><p>对于选择器的补充，CSS3做得很好了。翻了下资料，摘录如下：</p>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>h1~p</td>
+<td>选择h1元素后面所有的p元素，不必紧邻</td>
+</tr>
+<tr>
+<td>div p:first-of-type</td>
+<td>选择div里面在父元素下第一个出现的p元素，不必作为第一个子元素</td>
+</tr>
+<tr>
+<td>div p:last-of-type</td>
+<td>选择div里面在父元素下最后一个出现的p元素</td>
+</tr>
+<tr>
+<td>p:only-of-type</td>
+<td>选择其父元素下唯一的p元素，但仍可包含p的兄弟元素</td>
+</tr>
+<tr>
+<td>p:only-child</td>
+<td>选择作为其父元素的唯一子元素的p元素</td>
+</tr>
+<tr>
+<td>p:nth-child(n)</td>
+<td>选择作为其父元素的第n个子元素的p元素</td>
+</tr>
+<tr>
+<td>p:nth-last-child(n)</td>
+<td>同上，顺序相反</td>
+</tr>
+<tr>
+<td>p:nth-of-type(n)</td>
+<td>第n个p元素</td>
+</tr>
+<tr>
+<td>p:nth-last-of-type(n)</td>
+<td>同上，顺序相反</td>
+</tr>
+<tr>
+<td>p:last-child</td>
+<td>选择作为其父元素的最后一个子元素的p元素</td>
+</tr>
+<tr>
+<td>:root</td>
+<td>文档根元素</td>
+</tr>
+<tr>
+<td>p:empty</td>
+<td>选择无子元素的p元素（包括文本节点）</td>
+</tr>
+<tr>
+<td>#news:target</td>
+<td>选择当前活动的#news元素。（即通过a标签的href属性与等值id进行锚接的元素）</td>
+</tr>
+<tr>
+<td>input:enabled</td>
+<td>选择每个启用的input元素</td>
+</tr>
+<tr>
+<td>input:disabled</td>
+<td>选择禁用的</td>
+</tr>
+<tr>
+<td>input:checked</td>
+<td>选择每个被选中的</td>
+</tr>
+<tr>
+<td>:not(p)</td>
+<td>选择非p的每个元素</td>
+</tr>
+<tr>
+<td>::selection</td>
+<td>选择被用户选择的部分</td>
+</tr>
+</tbody>
+</table>
+<h2 id="值和单位"><a href="#值和单位" class="headerlink" title="值和单位"></a>值和单位</h2><h3 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h3><p>有几种方法可以设置颜色：</p>
+<ul>
+<li>继承： <code>color: inherit</code></li>
+<li>关键字声明： <code>red</code>  <code>maroon</code>  <code>silver</code>….太多，css3多达上百个吧，记不到。</li>
+<li>rgb函数式： <code>rgb(100%,100%,100%)</code>  <code>rgb(255,255,255)</code></li>
+<li>十六进制： <code>#ffffff</code>  <code>#fff</code><br>  <code>#336680</code>转换（3x16+3, 6x16+6, 8x16+0），即为 <code>rgb(51,102,128)</code>。 中灰色为<code>#808080</code></li>
+<li>rgba函数式（css3）： <code>rgba(255,255,255,0.5)</code>  </li>
+</ul>
+<h3 id="长度单位"><a href="#长度单位" class="headerlink" title="长度单位"></a>长度单位</h3><h4 id="绝对长度（很少用）"><a href="#绝对长度（很少用）" class="headerlink" title="绝对长度（很少用）"></a>绝对长度（很少用）</h4><p><code>in</code>  <code>cm</code>  <code>mm</code>  <code>pt</code>  <code>pc</code><br>1英寸2.54厘米，72点（pt）。  </p>
+<h4 id="相对长度"><a href="#相对长度" class="headerlink" title="相对长度"></a>相对长度</h4><ul>
+<li><code>em</code>：1个em为给定字体的<code>font-size</code>值</li>
+<li><code>ex</code>：字体中小写x的高度</li>
+<li><code>px</code>：像素</li>
+<li><code>%</code>：百分比<h4 id="其他-1"><a href="#其他-1" class="headerlink" title="其他"></a>其他</h4><code>ms</code>  <code>s</code>  <code>Hz</code>  <code>url(...)</code></li>
+</ul>
+<h2 id="字体、文本"><a href="#字体、文本" class="headerlink" title="字体、文本"></a>字体、文本</h2><h3 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h3><p><strong>字体系列</strong><br>如<code>Times</code>,<code>Verdana</code>,<code>Helvetica</code>,<code>Arial</code>这些都是一种特定的<strong>字体系列</strong>，其下包含好几种变形字体。CSS单独定义了几种<strong>通用</strong>字体系列：</p>
+<ul>
+<li><code>serif</code>： 字体成比例，有上下短线。如Times, Georgia, New Century Schoolbook.</li>
+<li><code>sans-serif</code>： 字体成比例，无上下短线。如Helvetica, Geneva, Verdana, Arial, Univers.</li>
+<li><code>monospace</code>： 字体不成比例，模拟打字机字体，字母宽度相同，如Courier, Courier New, Andale Mono.</li>
+<li><code>cursive</code>： 模范人的手写体，字母主要会有一些曲线。如Zapf Chancery, Author, Comic Sans.</li>
+<li><code>fantasy</code>： 未知的特征。  </li>
+</ul>
+<p>如果需要为文档使用一种无衬线字体，而并不关心具体哪一种，可以这样声明：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span> &#123; <span class="attribute">font-family</span>: sans-serif; &#125;</div></pre></td></tr></table></figure></p>
+<p>如果需要具体指定字体，可以这样写：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span> &#123; <span class="attribute">font-family</span>: Verdana,Arial,<span class="string">"Microsoft Yahei"</span>,sans-serif;&#125;</div></pre></td></tr></table></figure></p>
+<p>用户代理会寻找前两种具体字体，若无则自动选择一种无衬线字体。<strong>建议如此书写</strong>。  </p>
+<p><strong>字体风格</strong><br><code>font-style</code>： italic | oblique | normal | inherit，第一个斜体，第二个倾斜。  </p>
+<p><strong>字体拉伸</strong><br><code>font-stretch</code>： wider | narrower | …  </p>
+<p><strong>font属性</strong><br>所有font属性的合集。举例：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">h2</span> &#123;<span class="attribute">font</span>: bold italic <span class="number">2em</span>/<span class="number">1.2</span> Helvetica, Arial, sans-serif;&#125;</div></pre></td></tr></table></figure></p>
+<p>前面的顺序可以互换，但是字体大小必须在字体系列前面，且font属性必须有这两个。字体大小后面可选择性加行高值。<br>另外，font还有其它值可使字体与自带操作系统中字体类似，如<code>caption</code>——有标题的控件，如按钮；<code>icon</code>——图标标签；<code>menu</code>——菜单列表；<code>message-box</code>——对话框等。  </p>
+<p><strong>@font-face规则</strong><br>可以远程下载字体：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@<span class="keyword">font-face</span> &#123;</div><div class="line">    <span class="attribute">font-family</span>: <span class="string">"Scarborough Fair"</span>; </div><div class="line">    <span class="attribute">src</span>: <span class="built_in">url</span>(http://www.example.com/fonts/scarborough.ps);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h3><p>可完全代替之前的一些HTML标记，如<code>&lt;font&gt;</code>，<code>&lt;center&gt;</code>。  </p>
+<ul>
+<li><p><code>text-indent</code><br>首行缩进，应用于<strong>块级元素</strong>。如：<code>p {text-indent: 3em;}</code>。也可为负值，实现“悬挂缩进”。  </p>
+</li>
+<li><p><code>text-align</code><br>水平对齐，应用于<strong>块级元素</strong>。<code>left</code>,<code>center</code>,<code>right</code>,<code>justify</code>。  </p>
+</li>
+<li><p><code>line-height</code><br>文本行基线间的距离。line-height与字体大小之差就是<strong>行间距</strong>（文本上下各应用差的一半），应用于所有元素。具有继承性，最好设置缩放因子，继承的是缩放因子值，而非计算值，一般的行高值为字体大小的1.2倍。<br>这里先来说说<strong>文本行、行内框和行框</strong>：文本行就是一行文本；行内框指文本行中的每个元素（单个字、单词）都会产生的框，其内容区由字体大小确定，如果没有其他因素，行内框就完全等于内容区，但是line-height产生的行间距可以使行内框高度增加；行框是能包含整个一行文本的框，即足以包含最高行内框的顶端和最低行内框的底端。  </p>
+</li>
+<li><p><code>vertical-align</code><br>垂直对齐，应用于行内元素和表单元格，不影响块级元素。有值：<code>baseline</code>,<code>sub</code>,<code>super</code>,<code>top</code>,<code>text-top</code>,<code>middle</code>,<code>bottom</code>,<code>text-bottom</code>,以及长度值。  </p>
+</li>
+<li><p><code>word-spacing</code>,<code>letter-spacing</code><br>单词间距、字母间距  </p>
+</li>
+<li><p><code>text-transform</code><br>文本转换，<code>uppercase</code>,<code>lowercase</code>,<code>capitalize</code>，最后这个为首字母大写。  </p>
+</li>
+<li><p><code>white-space</code><br>此属性影响源文档中空格、换行和tab字符的处理，应用于所以元素。<br>默认情况下，也即<code>normal</code>的情况，文本中连续的空白符会合并为一个空格（所以需要多个则写<code>&amp;nbsp;</code>）；<br><code>pre</code>：保留空格及换行符，好比<code>&lt;pre&gt;</code>标签，不允许自动换行；<br><code>nowrap</code>：禁止换行，除非使用<code>&lt;br&gt;</code>标签，不允许自动换行；<br><code>pre-line</code>：合并空白符，保留换行符，允许自动换行；<br><code>pre-wrap</code>：保留空白符，保留换行符，允许自动换行。  </p>
+</li>
+</ul>
+<h2 id="基本视觉（块级、行内）"><a href="#基本视觉（块级、行内）" class="headerlink" title="基本视觉（块级、行内）"></a>基本视觉（块级、行内）</h2><p>这是关于CSS如何表现的理论知识，对于了解CSS的行为有帮助。  </p>
+<h3 id="一些概念"><a href="#一些概念" class="headerlink" title="一些概念"></a>一些概念</h3><ul>
+<li><p>正常流<br>即我们传统的文档布局：从左至右，上下至下。要让一个元素不在正常流中，唯一办法就是浮动或定位。（本章只讨论正常流中的元素）  </p>
+</li>
+<li><p>非替换元素<br>元素的内容即在文档中。如p、span元素  </p>
+</li>
+<li><p>替换元素<br>元素作为其他内容的占位符，如img、input元素  </p>
+</li>
+<li><p>块级元素<br>指段落、标题或div之类，正常流中，其框之前和之后生成“换行”。指定<code>display:block</code>可使元素生成块级框。  </p>
+</li>
+<li><p>行内元素<br>指span、strong之类，之前之后不生成“行分隔符”。  </p>
+</li>
+<li><p>包含块<br>包含块就是一个元素的“布局上下文”，由++最近的块级祖先元素、表单元格或行内块祖先框的<strong>内容边界</strong>++构成，注意，是内容边界。  </p>
+</li>
+<li><p>匿名文本<br>即未包含在行内元素的文本。  </p>
+</li>
+<li><p>em框<br>是在字体中定义的，也称为字符框。<code>font-size</code>属性就是设置字体em框大小的（注意<code>font-size</code>不是只某个字母的大小哦！）。  </p>
+</li>
+<li><p>行内框<br>内容区加行间距形成的框（针对元素来说），其值就为<code>line-height</code>值。  </p>
+</li>
+<li><p>行框<br>包含该行中所有行内框的最高点和最低点形成的最小框（针对一行来说）。</p>
+</li>
+</ul>
+<h3 id="块级元素"><a href="#块级元素" class="headerlink" title="块级元素"></a>块级元素</h3><p>水平方向：有七个属性：<code>margin-left</code>,<code>border-left</code>,<code>padding-left</code>,<code>width</code>,<code>padding-right</code>,<code>border-right</code>,<code>margin-right</code>. CSS2.1下width指的是内容区的宽度，而可见区域（即设置背景的区域）宽度是包含内容width、padding和border部分的。在CSS3中可通过<code>box-sizing</code>属性来改变width的指定。<br>并且有一个原则：这7个属性的值加在一起必须是<strong>元素包含块的宽度。</strong>，这往往就是该元素的父块级元素的width值。  </p>
+<p><code>width/height</code>和<code>margin</code>可以设置为<code>auto</code>值，padding不能！<br>对于<code>width</code>,<code>margin-left</code>,<code>margin-right</code>三个值，若仅一个为auto，则自动计算其长度；若两个margin为auto，则设置值相等，若width和其中一个margin为auto，则那个为auto的那个margin值自动计算为0；若三个值发生冲突，则自动视<code>margin-right</code>为<code>auto</code>。<br>对于<code>margin-top</code>,<code>margin-bottom</code>设置为<code>auto</code>，则会自动计算为0（所以通过设置margin，可水平居中一个块级元素，而不能垂直居中它）。<em>注意：对于定位元素来说，上下margin设为auto时处理有所不同。</em></p>
+<p>外边局margin可以设置为负数，但<code>width</code>,<code>border</code>,<code>padding</code>都不能为负！  </p>
+<p>高度<code>height</code>为auto时（也就是默认情况下），有个奇怪的现象：其高度会设置为其包含的子块级元素的<strong>最上边框</strong>到<strong>最下边框</strong>之间的距离，这时，子元素的外边距会“超出”包含这些子元素的元素。）；但当这个块级元素设置有内边距或边框时，其高度就会设置为其包含的子块级元素的<strong>最上外边距边界</strong>到<strong>最下外边距边界</strong>之间的距离。  </p>
+<p>垂直margin会合并为较大者。  </p>
+<h3 id="行内元素"><a href="#行内元素" class="headerlink" title="行内元素"></a>行内元素</h3><p><strong><code>font-size</code>,<code>line-height</code>,<code>vertical-align</code>会影响行内框的显示</strong>，继而影响行框，改变行间距。  </p>
+<p><code>padding</code>可以拉开边框，但这并不能改变行高，并不能影响行框的生成，虽然此时若应用背景好似变高了一样。<code>border</code>也不影响。  </p>
+<p>可以为行内元素应用左右margin，而<code>margin-top</code>,<code>margin-bottom</code>无效。（行内元素被浮动后就可以指定上下margin了。）  </p>
+<h2 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h2><p>CSS盒子模型老生常谈了，面试的时候常问，可见其重要性。它让我们可以更方便、强大地去控制布局和显示，是网页制作的基础。  </p>
+<p>由外至内：<code>margin</code>,<code>border</code>,<code>padding</code>,<code>content</code>。  </p>
+<p>首先需要说明的就是<code>width</code>,<code>height</code>属性，其值默认指content部分，不包含padding，CSS3中可指定<code>box-sizing</code>来控制它，比如<code>box-sizing:border-box</code>指明width包含padding。<br>另外，宽高设置对行内元素无效。  </p>
+<p>对于<code>margin</code>：可简写如<code>margin: 1em</code>,<code>margin: 1em 2em</code>,<code>margin: 1em 2em 3em 4em</code>，上右下左顺时针。正常流中垂直相邻外边距会合并为较大值（浮动元素不合并）。  </p>
+<p><code>border</code>属性是<code>border-style</code>,<code>border-width</code>,<code>border-color</code>三个属性的简写。<code>border-color</code>有一个<code>transparent</code>值，较有用。  </p>
+<p>对于<code>padding</code>：若是百分数值，则是相对于父元素的<code>width</code>进行设置（<code>margin</code>也如此）。  </p>
+<h2 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h2><p>浮动，不完全是定位，也不属于正常流。更像自成一派。<br>清除浮动<code>clear</code>指的是通过移动自身来让元素左边或右边或两边<strong>不出现</strong>浮动元素（自身可设置为浮动的）。<code>float:none</code>是设置自身不浮动。  </p>
+<p>在看书的时候不怎么明白，网上找到一篇文章，看后明朗得多。可见此篇：  </p>
+<blockquote>
+<p><a href="https://aierwa.github.io/2017/04/07/translate-floats-and-clearing/" target="_blank" rel="external">【翻译】浮动和清除</a>  </p>
+</blockquote>
+<h2 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h2><p>相对于浮动来说，定位要简单些。  </p>
+<p><code>position</code>：<code>static</code>,<code>relative</code>,<code>absolute</code>,<code>fixed</code>,<code>inherit</code>.  </p>
+<h3 id="偏移属性"><a href="#偏移属性" class="headerlink" title="偏移属性"></a>偏移属性</h3><p>完成定位，少不了这四个属性：<code>top,right,bottom,left</code>。其定义了距离包含块最近边的偏移（所以得名<em>offset</em>）。<br>例如：<code>top</code>描述了定位元素<strong>上外边距</strong>离其包含块的顶端多远。  </p>
+<p>可以用这4个属性来确定定位元素的宽度高度，比如，需要定位元素占据其包含元素的右下角1/4部分：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#posi &#123;</div><div class="line">    position: absolute;</div><div class="line">    top: 50%;</div><div class="line">    left: 50%;</div><div class="line">    right: 0;</div><div class="line">    bottom: 0;</div><div class="line">&#125;</div><div class="line">```  </div><div class="line">注意，如果是相对定位的话其宽高只能是定位前的值，这4个属性只定义偏移量，且如若都定义了只以`top`和`left`为准。  </div><div class="line"></div><div class="line">### 内容溢出</div><div class="line">`overflow`属性是内容溢出时是否裁剪；`clip`是设置裁剪区域的形状（**注意：**只有`absolute`和`fixed`定位时可用）。  </div><div class="line">在一个200x200的定位矩形框内设置裁剪区域为中心100x100的区域：</div></pre></td></tr></table></figure></p>
+<p>#posi {<br>    position: absolute;<br>    width: 200px;<br>    height: 200px;<br>    overflow: hidden;<br>    clip: rect(50px,150px,150px,50px);<br>    background: gray;<br>    border: 2px solid red;<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">效果如图1所示。注意，clip函数中四个值分别是上右下左四条边++相对于左上角++的距离。  </div><div class="line">![aierwa](/upload/articles/after-read-css-definitive-guide-1.jpg &quot;图1 clip的用法&quot;)  </div><div class="line"></div><div class="line">控制元素可见性：`visibility`: `visible`,`hidden`,`collapse`.  </div><div class="line"></div><div class="line">### 放置</div><div class="line">绝对定位一个元素，当偏移量设置为`auto`时（即默认位置），与其静态位置一致。  </div><div class="line"></div><div class="line">假设左右外边距都设置为`auto`，而`left`,`width`,`right`都不是`auto`，那么此时左右外边距会设置为相等的值，实际上这会让元素水平居中。上下同理。因此，这里可延伸一**水平垂直居中元素**方法（*IE7-不支持垂直居中*）：</div><div class="line">```css</div><div class="line">#center-posi &#123;</div><div class="line">    position: relative;</div><div class="line">    width: 10em;</div><div class="line">    height: 3em;</div><div class="line">    top: 0;</div><div class="line">    bottom: 0;</div><div class="line">    left: 0;</div><div class="line">    right: 0;</div><div class="line">    margin: auto;</div><div class="line">&#125;</div><div class="line">```  </div><div class="line"></div><div class="line">`z-index`，设置叠放，可为负值。但CSS2.1规定，元素绝对不会叠放在其叠放上下文的背景之下。</div><div class="line"></div><div class="line">## 其它东东</div><div class="line">### 表布局</div><div class="line">`display`属性中与表相关的值及其表现行为最接近的元素如下表：  </div><div class="line">`display`值 | 行为最接近的HTML元素</div><div class="line">--- | ---</div><div class="line">table | &lt;table&gt;</div><div class="line">inline-table | &lt;table&gt;</div><div class="line">table-row | &lt;tr&gt;</div><div class="line">table-row-group | &lt;tbody&gt;</div><div class="line">table-header-group | &lt;thead&gt;</div><div class="line">table-footer-group | &lt;tfoot&gt;</div><div class="line">table-column | &lt;col&gt;</div><div class="line">table-column-group | &lt;colgroup&gt;</div><div class="line">table-cell | &lt;td&gt;、&lt;th&gt;</div><div class="line">table-caption | &lt;caption&gt;  </div><div class="line"></div><div class="line">可以为`display`值为`table`或`inline-table`的元素设置：`border-collapse`,`border-spacing`来设置单元格边框的显示和距离。  </div><div class="line"></div><div class="line">表宽度：`table-layout: fixed;`指定表为固定布局模型。列的宽度由首行设置确定，为`auto`的列会自动确定大小，使宽度尽量相等。`table-layout: auto`用户代理会自动计算宽度。  </div><div class="line"></div><div class="line">可为单元格元素设置`vertical-align`属性垂直放置。  </div><div class="line"></div><div class="line">### 列表</div><div class="line">可设置`display`值为`list-item`进行列表显示。  </div><div class="line"></div><div class="line">列表类型：`list-style-type`:`disc`,`circle`,`square`,`decimal`,`lower-roman`......  </div><div class="line">列表项图像：`list-style-image`: &lt;uri&gt;。为防止图片加载不了，可以同时设置一个列表类型。  </div><div class="line">列表标志位置：`list-style-position`: `inside`,`outside`.  </div><div class="line">可简写：`list-style: url(ohio.gif) square inside;`  </div><div class="line"></div><div class="line">### :before :after</div><div class="line">伪元素，可向文档中插入生成内容。  </div><div class="line"></div><div class="line">比如，为所有具备href属性的链接增加前缀文本&quot;(link)&quot;：</div><div class="line">```css</div><div class="line">a[href]:before &#123; content: &quot;(href)&quot;; &#125;</div></pre></td></tr></table></figure></p>
+<p>又如，为所有pdf文档链接添加一个小图标：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">a</span><span class="selector-class">.pdf</span><span class="selector-pseudo">:after</span> &#123; <span class="attribute">content</span>: <span class="built_in">url</span>(pdf-icon.gif); &#125;</div><div class="line">```  </div><div class="line"></div><div class="line">另外，我们还可以插入属性值。比如为每个链接后面显示出它所指向的链接地址：</div><div class="line">```<span class="selector-tag">css</span></div><div class="line"><span class="selector-tag">a</span><span class="selector-attr">[href]</span><span class="selector-class">.after</span> &#123; <span class="attribute">content</span>: <span class="string">" ["</span> <span class="built_in">attr</span>(href) <span class="string">"] "</span>&#125;   <span class="comment">/*注意：这里进行了文本和属性的混合使用*/</span></div></pre></td></tr></table></figure></p>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p>鼠标样式：<code>cursor</code>: <code>pointer</code>等等，除此之外，可以通过url()指定定制光标。  </p>
+<p>轮廓：<code>outline</code>,不会影响文档流！其次，轮廓可能不是矩形（行内元素换行时）。轮廓画在外边框边界外面的。其指定值与border类似。  </p>
+<p>背景：<code>background</code>汇总属性，[ <background-color> || <background-iamge> || <background-repeat> || <background-attachment> || <background-position> ]。<br>可以任意顺序，例如：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span> &#123;</div><div class="line">    <span class="attribute">background</span>: white <span class="built_in">url</span>(pic.gif) no-repeat fixed center;</div><div class="line">&#125;</div></pre></td></tr></table></figure></background-position></background-attachment></background-repeat></background-iamge></background-color></p>
+<p>说一下<code>background-attachment: fixed</code>：声明图像相对于可视区（可视窗口）进行放置且是固定的，不受滚动影响。这可以做有意思的效果，比如“复螺旋变形”（书上例子的网站进不去……但可以想象出那种效果）。即用几张清晰度不同的图片都相对于可视区放置背景，然后滚动后重叠部分就会有所变化。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSS/" rel="tag"># CSS</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/07/translate-floats-and-clearing/" rel="next" title="【翻译】Floats and clearing （浮动和清除）">
+                <i class="fa fa-chevron-left"></i> 【翻译】Floats and clearing （浮动和清除）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/upload/avatar.jpg"
+               alt="Aierwa" />
+          <p class="site-author-name" itemprop="name">Aierwa</p>
+           
+              <p class="site-description motion-element" itemprop="description">中不偏，庸不易</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/aierwa" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于CSS"><span class="nav-number">1.</span> <span class="nav-text">关于CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#历史、版本"><span class="nav-number">1.1.</span> <span class="nav-text">历史、版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">1.2.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择器"><span class="nav-number">2.</span> <span class="nav-text">选择器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#哪些选择器？"><span class="nav-number">2.1.</span> <span class="nav-text">哪些选择器？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择器的特殊性"><span class="nav-number">2.2.</span> <span class="nav-text">选择器的特殊性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补充：CSS3选择器"><span class="nav-number">2.3.</span> <span class="nav-text">补充：CSS3选择器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#值和单位"><span class="nav-number">3.</span> <span class="nav-text">值和单位</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#颜色"><span class="nav-number">3.1.</span> <span class="nav-text">颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#长度单位"><span class="nav-number">3.2.</span> <span class="nav-text">长度单位</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#绝对长度（很少用）"><span class="nav-number">3.2.1.</span> <span class="nav-text">绝对长度（很少用）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相对长度"><span class="nav-number">3.2.2.</span> <span class="nav-text">相对长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他-1"><span class="nav-number">3.2.3.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字体、文本"><span class="nav-number">4.</span> <span class="nav-text">字体、文本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字体"><span class="nav-number">4.1.</span> <span class="nav-text">字体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本"><span class="nav-number">4.2.</span> <span class="nav-text">文本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本视觉（块级、行内）"><span class="nav-number">5.</span> <span class="nav-text">基本视觉（块级、行内）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一些概念"><span class="nav-number">5.1.</span> <span class="nav-text">一些概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#块级元素"><span class="nav-number">5.2.</span> <span class="nav-text">块级元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行内元素"><span class="nav-number">5.3.</span> <span class="nav-text">行内元素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#盒子模型"><span class="nav-number">6.</span> <span class="nav-text">盒子模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浮动"><span class="nav-number">7.</span> <span class="nav-text">浮动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定位"><span class="nav-number">8.</span> <span class="nav-text">定位</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#偏移属性"><span class="nav-number">8.1.</span> <span class="nav-text">偏移属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它"><span class="nav-number">8.2.</span> <span class="nav-text">其它</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aierwa</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
