@@ -1,0 +1,910 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="网络基础,阅读笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="说在前面
+Metcalfe定律：网络的价值与联网的用户数的平方成正比。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【阅读笔记】《计算机网络》">
+<meta property="og:url" content="http://yoursite.com/2017/07/12/after-reading-computer-networks/index.html">
+<meta property="og:site_name" content="Aierwa | 平凡之路">
+<meta property="og:description" content="说在前面
+Metcalfe定律：网络的价值与联网的用户数的平方成正比。">
+<meta property="og:image" content="http://yoursite.com/upload/articles/after-reading-computer-networks.png">
+<meta property="og:updated_time" content="2017-07-12T14:44:30.859Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【阅读笔记】《计算机网络》">
+<meta name="twitter:description" content="说在前面
+Metcalfe定律：网络的价值与联网的用户数的平方成正比。">
+<meta name="twitter:image" content="http://yoursite.com/upload/articles/after-reading-computer-networks.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/12/after-reading-computer-networks/"/>
+
+
+
+
+
+  <title> 【阅读笔记】《计算机网络》 | Aierwa | 平凡之路 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aierwa | 平凡之路</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-slide">
+          <a href="/slide" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-photo"></i> <br />
+            
+            幻灯片
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/12/after-reading-computer-networks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aierwa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/upload/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aierwa | 平凡之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【阅读笔记】《计算机网络》
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-12T22:27:56+08:00">
+                2017-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/upload/articles/after-reading-computer-networks.png" alt="aierwa" title="于新九眼桥"></p>
+<h2 id="说在前面"><a href="#说在前面" class="headerlink" title="说在前面"></a>说在前面</h2><blockquote>
+<p>Metcalfe定律：网络的价值与联网的用户数的平方成正比。  </p>
+</blockquote>
+<a id="more"></a>
+<p>这个世界之所以能被每个人挂在嘴边侃侃而谈，是因为这是个网络的世界。网络是建立在计算机的基础上，手机也好，电脑也好，就是人与人交互的载体。可见，网络的伟大之处在于真正互联了这个世界。有幸于其中且进一步去了解它，但是，真的好难！看看这本砖头一样的《计算机网络》就知道了，还仅仅是冰山一角而已。<br>搞前端其实也就是跟网络打交道，没网络，何来请求，何来交互。所以，还是很愿意去多了解网络的一些知识。  </p>
+<p>很经典的第五版《计算机网络》/《COMPUTER NETWORKS》，看得懂的不是很多，尤其是关于技术层面的算法之类也是一眼带过，要真正了解技术本身怕是也不是本书可以达到的目的。大致阅读了一遍，希望能理一个轮廓出来，也算上第一遍的目的了。  </p>
+<h2 id="引言开始了"><a href="#引言开始了" class="headerlink" title="引言开始了"></a>引言开始了</h2><p>大量相互独立但彼此连接的计算机共同组成的系统称为<strong>计算机网络</strong>，如何++设计并组织++这些网络就是本书的主题。  </p>
+<h3 id="计算机网络的使用"><a href="#计算机网络的使用" class="headerlink" title="计算机网络的使用"></a>计算机网络的使用</h3><ul>
+<li>资源共享、通信、电子商务</li>
+<li>对等（P2P）、即时消息、射频识别（RFID）</li>
+<li>移动无线、蜂窝3G/4G、GPS、进场通信（NFC）</li>
+</ul>
+<h3 id="硬件层面"><a href="#硬件层面" class="headerlink" title="硬件层面"></a>硬件层面</h3><p>两个维度来看网络：传输技术和网络尺度讨论。  </p>
+<p>传输技术：点到点（单播）、广播/组播  </p>
+<p>网络尺度：</p>
+<ul>
+<li>个域网（PAN, Personal Area Network）：如蓝牙</li>
+<li>局域网（LAN, Local Area Network）：会用到路由器（无线LAN）或交换机（有线LAN）等</li>
+<li>城域网（MAN, Metropolitan Area Network）：有线电视、WiMAX</li>
+<li>广域网（WAN, Wide Area Network）：Internet服务提供商（ISP）</li>
+</ul>
+<h3 id="软件层面"><a href="#软件层面" class="headerlink" title="软件层面"></a>软件层面</h3><p>为了降低网络设计的复杂性，绝大多数网络都组织成一个<strong>层次栈</strong>，每一层都建立在其下一层的基础之上。每一层有其自己的通信<strong>协议</strong>，并且为上一层提供<strong>接口</strong>。协议和接口是重要的。  </p>
+<p>层次设计有一些关键问题：</p>
+<ul>
+<li>可靠性（检错、纠错、路由等）</li>
+<li>网络演进（协议分层、可扩展等）</li>
+<li>资源分配（统计复用带宽、流量控制、拥塞）</li>
+<li>如何保护网络（保密性、认证、完整性）</li>
+</ul>
+<p>一般下层向上层提供的服务分为++面向连接服务和无连接服务++。  </p>
+<p>服务和协议的区别：服务是某一层向上一层提供的一组原语（操作），但不涉及如何实现这些操作。协议是一组规则。</p>
+<h3 id="参考模型"><a href="#参考模型" class="headerlink" title="参考模型"></a>参考模型</h3><p>网络设计抽象出来就是层次模型。<br>两个很重要的模型：OSI参考模型和TCP/IP参考模型。前者没有被使用，但模型本身具有普遍意义；后者模型本身没有多大用处，但协议已经广为流传。  </p>
+<p><strong>OSI参考模型</strong>：<br>开放系统互连（OSI, Open Systems Interconnection）参考模型，基于国际标准化组织（ISO）的提案。之所以叫做参考模型，是因为模型仅指明了每一层应该做些什么事，并没有定义每一层的服务和所用的协议。OSI一共7层：</p>
+<ul>
+<li>物理层：关注如何在一条通信信道上传输原始比特。</li>
+<li>数据链路层：掩盖物理层的传输错误，将比特信息封装成数据帧。</li>
+<li>网络层：数据包从源端路由到接收方。基于IP地址。</li>
+<li>传输层：接受上一层的数据，必要时分割成较小的单元，然后传递给网络层。端到端的层，基于端口号。</li>
+<li>会话层：提供各种服务，包括对话控制、令牌管理、同步功能等。</li>
+<li>表示层：关注所传递信息的语法和语义。</li>
+<li>应用层：具体的应用程序和服务。如HTTP协议用于web浏览。</li>
+</ul>
+<p><strong>TCP/IP参考模型</strong>：  </p>
+<ul>
+<li>链路层/网络接口层</li>
+<li>互联网层：官方的数据包格式和协议为因特网协议（IP, Internet Protocol）。</li>
+<li>传输层：传输控制协议（TCP, Transport Contorl Protocol）、用户数据报协议（UDP, User Datagram Protocol）</li>
+<li>应用层：虚拟终端协议（TELNET）、文件传输协议（FTP）、电子邮件协议（SMTP）、域名系统（DNS）、HTTP等。</li>
+</ul>
+<p><strong>本书使用的模型</strong>：<br>混合模型：</p>
+<ul>
+<li>应用层</li>
+<li>传输层</li>
+<li>网络层</li>
+<li>数据链路层</li>
+<li>物理层</li>
+</ul>
+<p>梳理：++物理层++规定了如何在不同的介质上以电气（或其它模拟）信号传输比特。++链路层++关注的是如何在两台直接相连的计算机之间发送有限长度的消息，并具有指定级别的可靠性（以太网和802.11是链路层协议的例子）。++网络层++主要处理如何把多条链路结合到网络中，以及如何把网络与网络连接成互联网络，以便使我们可以在两个相隔遥远的计算机之间发送数据包。网络层的任务包括找到传递数据包所走的路径（IP协议是例子）。++传输层++增强了网络层的传递保证，通常具有更高的可靠性，而且提供了数据交付的抽象，比如满足不同应用要求的可靠字节流（TCP协议是例子）。++应用层++包含了使用网络的应用程序。</p>
+<h2 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h2><h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p>改变诸如电压或电流等某种物理特性的方法可用来在电线上传输信息。<br>时间t为自变量，f(t)为电压或电流值，就可以通过数学的手段进行建模。  </p>
+<p>傅里叶分析，n次谐波。<br><strong>带宽</strong>：在传输过程中振幅不会明显减弱的频率的宽度。带宽是传输介质的一种物理特性。<br>信道的最大比特率与其带宽和信噪比相关。  </p>
+<h3 id="传输介质"><a href="#传输介质" class="headerlink" title="传输介质"></a>传输介质</h3><p>传输介质体现在带宽、延迟、成本、安装维护等。</p>
+<ul>
+<li>磁介质</li>
+<li>双绞线：两根相互绝缘的铜线组成（螺旋缠绕能显著降低电线的辐射）。</li>
+<li>同轴电缆：硬的铜芯，外面包上绝缘材料。更好的屏蔽性、更大的带宽。</li>
+<li>电力线</li>
+<li>光纤：以光脉冲传播。三个关键部件：光源（LED、半导体激光）、传输介质（超薄玻纤）、探测器。电话系统的非对称数字用户线ADSL。</li>
+</ul>
+<h3 id="无线传输"><a href="#无线传输" class="headerlink" title="无线传输"></a>无线传输</h3><p>当电子运动时会产生电磁波，电磁波可以在空中传播（即使在真空）。1865年Maxwell预言了这种波，1887年Hertz观察到了。（这些人太厉害了。）</p>
+<ul>
+<li>无线电传输：AM调幅  </li>
+<li>微波传输：100MHZ以上，频率较高，不能很好穿透建筑物，当到4GHZ时，易被水吸收（微波炉原理）。所以传输应该避开这个链路。各个国家管制着频段的使用，也开放非许可性频段，可免费使用（2.4GHZ段的802.11b/g和蓝牙就基于此）。</li>
+<li>红外传输：非引导性的红外波被广泛用于短程通信，具有方向性、便宜、不能穿过固体物体。</li>
+<li>卫星通信：同步卫星、中地球轨道卫星（GPS）、低地球轨道卫星（铱计划）</li>
+</ul>
+<h3 id="数字调制与多路复用"><a href="#数字调制与多路复用" class="headerlink" title="数字调制与多路复用"></a>数字调制与多路复用</h3><p>比特与代表它们的信号之间的转换过程称为数字调制。<br>信道通常被多个信号共享，这种形式称为<strong>多路复用技术</strong>。具体可分为时分复用、频分复用、码分复用等。  </p>
+<p>频分复用（FDM）：将频谱分成几个频段，每个用户完全拥有其中的一个 频段来发送自己的信号。AM调幅广播即是FDM的实例。相邻信道频谱间隔要较大，以便防止干扰。<br>正交频分复用（OFDM）：更有效，广泛用于802.11、有线电视网络、4G等。  </p>
+<p>码分多址（CDMA）：允许每个站利用整个频段发送信号，利用编码理论可以将多个并发的传输分离开。</p>
+<h3 id="移动电话系统"><a href="#移动电话系统" class="headerlink" title="移动电话系统"></a>移动电话系统</h3><p>也称蜂窝电话，是因为一个地理区域被分成许多个蜂窝。每个蜂窝使用一组频率，不会被其任何一个邻居使用。<br>1G，模拟语音<br>2G，数字语音，主导系统为全球移动通信系统（GSM）<br>3G，数字语音和数据，以码分多址为基础。增强数据率的GSM演进（EDGE），或叫2.1G。<br>4G，长期演进（LTE）。</p>
+<h2 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h2><h3 id="设计问题"><a href="#设计问题" class="headerlink" title="设计问题"></a>设计问题</h3><p>本层涉及两台相邻机器实现可靠有效的完整信息块（称为帧）通信的一些算法，而不是物理层那样只关注单个比特传输。<br>该层要完成如下功能：</p>
+<ul>
+<li>向网络层提供一个定义良好的服务接口</li>
+<li>处理传输错误</li>
+<li>调节数据流，确保慢速的接收方不会被快速的发送方淹没。</li>
+</ul>
+<p>提供的服务可分为三种：无确认的无连接服务、有确认的无连接服务和有确认的有连接服务。<br>数据链路层从网络层获得数据包，然后将这些数据包封装成帧以便传输。帧包括帧头、有效载荷和帧尾。成帧方式包括字节计数、字节填充和比特填充等</p>
+<h3 id="差错检测和纠正"><a href="#差错检测和纠正" class="headerlink" title="差错检测和纠正"></a>差错检测和纠正</h3><p>传输错误非常普遍，必须知道如何处理传输错误。<br>纠错码、检错码、校验和、各种编码blabla</p>
+<h3 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h3><p>物理层进程和部分数据链路层进程运行在一个称为网络接口卡（NIC, Network Interface Card）的专用硬件上。<br>点到点协议（PPP, Point-to-Point Protocol），SONET和ADSL链路都使用PPP</p>
+<h2 id="介质访问控制子层"><a href="#介质访问控制子层" class="headerlink" title="介质访问控制子层"></a>介质访问控制子层</h2><p>用来确定多路访问信道（广播信道）下一个使用者的协议属于数据链路层的一个子层，该层称为介质访问控制（MAC, Medium Access Control）子层。在WLAN中尤为重要。  </p>
+<p>本章的主题是++如何在竞争用户之间分配单个广播信道++。信道可以是一个地理区域内的一部分无线频谱，也就可以是连接着多个节点的单根电缆或者光纤。<br>FM无线电广播是一个无线信道静态分配的例子。每个电台获得其波段的一部分。</p>
+<h3 id="以太网"><a href="#以太网" class="headerlink" title="以太网"></a>以太网</h3><p>有线局域网？<br>两类：经典以太网、交换式以太网（使用交换机）。  </p>
+<p>交换式以太网的核心是交换机，它包含一块连接所有端口的高速背板，是一个盒子，通常有4-48个端口。交换机只是把帧输出到该帧想去的端口，当交换机端口接收到来自某个站的以太网帧，它就检查该帧的以太网地址，确定该帧前往的目的地端口。取代了以前的集线器。  </p>
+<p>以太网的发展：快速以太网（802.3u）、千兆以太网（802.3ab）、万兆以太网</p>
+<h3 id="无线局域网"><a href="#无线局域网" class="headerlink" title="无线局域网"></a>无线局域网</h3><p>802.11体系结构主要是：每个客户端与一个接入点（AP, Access Point）关联，该AP又与其它网络连接，客户端发送和接收数据包都要通过AP进行。  </p>
+<p>物理层：所有802.11技术都使用短程无线电传输信号，通常在2.4GHz和5GHz频段，因为是非许可的。<br>802.11b运行速率在11Mbps<br>802.11a/g在54Mbps，基于OFDM。<br>MAC子层协议采用带有冲突避免的CSMA。  </p>
+<p>蓝牙（Bluetooth），爱立信，SIG，蓝牙3.0，跳频扩展，2.4GHz。  </p>
+<p>无线射频识别（RFID, Radio Frequency IDentification），智能卡，没有电池的标签，读写器。<strong>物联网的愿景</strong>  </p>
+<h3 id="数据链路层交换"><a href="#数据链路层交换" class="headerlink" title="数据链路层交换"></a>数据链路层交换</h3><p><strong>中继器/集线器/网桥/交换机/路由器/网关</strong>：<br>理解这些设备的关键在于它们运行的层次。在典型场景中，用户生成某些数据，然后将这些数据发送给远程机器。这些数据首先被传递给传输层，传输层会加上一个头（比如TCP头），然后将结果单元往下传递给网络层，网络层也会加上一个头，形成一个网络层数据包（比如IP包），然后，该分组再往下到达数据链路层，该层加上它自己的头和校验和（CRC），并将结果帧交给物理层传送出去，比如，通过一个LAN传送出去。<br>中继器和集线器工作在物理层，它们并不理解帧、数据包或帧头，只负责信号放大或集中多条线路等的作用。<br>网桥工作在数据链路层，连接两个或多个局域网，只把帧输送到所需要的端口，使用泛洪算法和向后学习法。<br>交换机是现代网桥的一种别称。<br>路由器工作在网络层。传输网关和应用网关分别在传输层和应用层。</p>
+<h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><h3 id="设计问题-1"><a href="#设计问题-1" class="headerlink" title="设计问题"></a>设计问题</h3><p>网络层关注的是如何将源端数据包一路送到接收方，是处理端到端数据传输的最底层。为了实现这个目标，网络层必须知道网络拓扑结构（即所有路由器和链路的集合），并从中选择适当的路径。<br>在路径中的路由器需要存储转发数据包交换。<br>提供给传输层的服务分为面向连接的服务和无连接的服务。  </p>
+<h3 id="路由算法"><a href="#路由算法" class="headerlink" title="路由算法"></a>路由算法</h3><p>是网络层软件的一部分，应保证正确性、简单性、鲁棒性（即健壮性）、稳定性、公平性和有效性等。<br>分为两种，非自适应算法，即静态路由；自适应算法，即动态路由。  </p>
+<p>满足最优化原则。有很多种算法：</p>
+<ul>
+<li>最短路径算法</li>
+<li>泛洪算法</li>
+<li>距离矢量算法</li>
+<li>链路状态路由算法</li>
+</ul>
+<h3 id="Internet的网络层"><a href="#Internet的网络层" class="headerlink" title="Internet的网络层"></a>Internet的网络层</h3><p>将整个Internet粘合在一起的正是网络层协议，Internet协议（IP, Internet Protocol）。<br>传输层获取数据流，并且将数据流拆分成段，以便作为IP数据包发送。理论上，每个数据包最多可容纳64KB，但实际上通常不超过1500字节（这样正好可放到一个以太网帧中）。  </p>
+<p>IPv4协议主宰着今天的Internet，但32位地址不够用了，所以现在在发展IPv6了，有128位地址。  </p>
+<p>Internet上的每台主机以及<em>路由器</em>都有一个IP地址，IP地址实际上不指向一台主机，而是一个网络接口。所以有多个接口的路由器会有多个IP地址。IP地址由高位的可变长网络和低位的主机两部分数据组成。其书写方式为点分十进制，32位共4个字节，每个字节写成十进制，取值0-255。如128.208.0.0/24表示有24位作为网络位置，剩下的8位作为主机位置，可以将之与子网掩码255.255.255.0进行AND操作以提取出该IP地址的网络部分。  </p>
+<p>除了IP协议，还有几个辅助控制协议。<br>Internet控制消息协议（ICMP）、ARP、动态主机配置协议（DHCP）  </p>
+<p><strong>地址解析协议</strong>（ARP）：数据链路层的硬件网卡并不理解IP地址，NIC根据起48位全球唯一的MAC地址来发送和接收帧，它们对32位的IP地址一无所知。问题来了，如何将IP地址映射到MAC地址呢？<br>现在考虑主机A给主机B发送数据包：第一步，通过DNS系统查找B的IP地址；第二步，A构建包含B的IP地址的数据包，广播到以太网上；第三步，B将自己的MAC地址作为应答返回给A；第四步，A构建一个以太网帧，目标为B的MAC地址；第五步，B收到。整个中间还要做很多优化。</p>
+<h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><h3 id="传输服务"><a href="#传输服务" class="headerlink" title="传输服务"></a>传输服务</h3><p>传输层架构在网络层提供的服务之上，把数据传递服务从两台计算机之间扩展到了两台计算机的进程之间。还涉及可靠性、连接和拥塞控制。<br>传输层的代码完全运行在用户的机器上。<br>传输层上即使一个非常简单的单向数据交换过程也比网络层的交换过程复杂得多，发送的每个数据包（最终）都要被确认。<br>当不再需要一个连接时必须将之释放，以便释放两个传输实体内部的表空间，中断方式有两种：非对称的和对称的。</p>
+<h3 id="传输协议的要素"><a href="#传输协议的要素" class="headerlink" title="传输协议的要素"></a>传输协议的要素</h3><p>传输服务通过端口（port）来寻址。<br>TCP建立连接是个问题，使用<strong>三次握手</strong>机制。连接释放也是一个问题。</p>
+<h3 id="UDP与TCP"><a href="#UDP与TCP" class="headerlink" title="UDP与TCP"></a>UDP与TCP</h3><p>用户数据报协议（UDP）是无连接协议，是简单的。传输控制协议（TCP）是面向连接协议，目的是提供可靠的端到端字节流。</p>
+<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><h3 id="DNS域名系统"><a href="#DNS域名系统" class="headerlink" title="DNS域名系统"></a>DNS域名系统</h3><p>由ICANN组织进行分配，有超过250个顶级域名，进一步划分子域。顶级域名分两种，通用的，如com，国家或地区的，如cn。blabla  </p>
+<h3 id="万维网"><a href="#万维网" class="headerlink" title="万维网"></a>万维网</h3><p>web诞生于1989年的欧洲原子能研究中心CERN。第一个图形浏览器Mosaic发布于1993.2。于是组建了网景公司。1994年建立了万维网联盟W3C，致力于web标准。  </p>
+<p>web页面的获取：<br>点击 》 查询DNS 》 建立TCP连接 》 发送请求 》 服务器响应 》 客户端显示 》 释放连接  </p>
+<p>cookie可用于web跟踪，但防止跨站。  </p>
+<p>如今的web应用模式就是云计算的普遍模式，即让计算从PC移动到Internet的共享服务器集群中。  </p>
+<p>产生动态web的方法：</p>
+<ul>
+<li>公共网关接口（CGI）：后台脚本处理，可以选择Python、Ruby、Perl等</li>
+<li>HTML中嵌入脚本：服务器执行这些脚本并显示最终结果，可选择超文本预处理器（PHP）、JSP、ASP.NET等。</li>
+<li>客户端动态web：<strong>JavaScript</strong>，AJAX</li>
+</ul>
+<p><strong>HTTP</strong>：运行在TCP之上的请求-响应协议。HTTP 1.0中连接建立后浏览器只发送一个请求，之后一个响应被发回来，再然后TCP连接就被释放了。<br>HTTP 1.1支持持续连接。可连接重用。<br>请求的操作称为方法，如GET，通用形式是<code>GET filename HTTP/1.1</code>。每个请求都会得到一个响应，每个响应消息由一个状态行及可能的附加信息组成。<br>HTTP缓存机制。</p>
+<h3 id="内容分发"><a href="#内容分发" class="headerlink" title="内容分发"></a>内容分发</h3><p>一些流行站点如YouTube等对网络性能提出了要求。没有单个服务器足以强大到或者可靠到足以应付如此令人吃惊程度的需求。<br>内容分发网络（CDN, Content Distribution Network），内容提供商在某些位置建立一组分布式机器。<br>DNS是CDN的核心，负责去找到合适的服务器。  </p>
+<p>Web代理是ISP或其它机构缓存内容，用户请求就不用每次都到内容所在的服务器了，Web代理还可用于过滤网站。  </p>
+<p>不同网络区域中的CDN节点称为<strong>镜像点</strong>。  </p>
+<p>另外一种可以分发大量内容的是对等网络（P2P, Peer-to-Peer）。BT（BitTorrent）是最流行的P2P协议。</p>
+<h2 id="网络安全"><a href="#网络安全" class="headerlink" title="网络安全"></a>网络安全</h2><p>在越来越依靠网络的时代，安全第一！<br>blabla…  </p>
+<p>列几个目录吧：</p>
+<ul>
+<li>密码学</li>
+<li>对称密钥算法<ul>
+<li>DES——数据加密标准</li>
+<li>AES——高级加密标准</li>
+</ul>
+</li>
+<li>公开密钥算法 RSA</li>
+<li>数字签名<ul>
+<li>对称密钥签名</li>
+<li>公开密钥签名</li>
+<li>消息摘要</li>
+<li>生日攻击</li>
+</ul>
+</li>
+<li>公钥的管理<ul>
+<li>证书</li>
+<li>X.509</li>
+</ul>
+</li>
+<li>通信安全<ul>
+<li>IPSec</li>
+<li>防火墙</li>
+<li>虚拟专用网络</li>
+<li>无线安全性</li>
+</ul>
+</li>
+<li>Web安全性<ul>
+<li>安全命名</li>
+<li>SSL——安全套接层</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网络基础/" rel="tag"># 网络基础</a>
+          
+            <a href="/tags/阅读笔记/" rel="tag"># 阅读笔记</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/26/a-summary-of-student-career/" rel="next" title="画下学校生涯的句号">
+                <i class="fa fa-chevron-left"></i> 画下学校生涯的句号
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/upload/avatar.jpg"
+               alt="Aierwa" />
+          <p class="site-author-name" itemprop="name">Aierwa</p>
+           
+              <p class="site-description motion-element" itemprop="description">中不偏，庸不易</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/aierwa" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#说在前面"><span class="nav-number">1.</span> <span class="nav-text">说在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引言开始了"><span class="nav-number">2.</span> <span class="nav-text">引言开始了</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机网络的使用"><span class="nav-number">2.1.</span> <span class="nav-text">计算机网络的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#硬件层面"><span class="nav-number">2.2.</span> <span class="nav-text">硬件层面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软件层面"><span class="nav-number">2.3.</span> <span class="nav-text">软件层面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考模型"><span class="nav-number">2.4.</span> <span class="nav-text">参考模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#物理层"><span class="nav-number">3.</span> <span class="nav-text">物理层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-number">3.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传输介质"><span class="nav-number">3.2.</span> <span class="nav-text">传输介质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无线传输"><span class="nav-number">3.3.</span> <span class="nav-text">无线传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字调制与多路复用"><span class="nav-number">3.4.</span> <span class="nav-text">数字调制与多路复用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移动电话系统"><span class="nav-number">3.5.</span> <span class="nav-text">移动电话系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据链路层"><span class="nav-number">4.</span> <span class="nav-text">数据链路层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设计问题"><span class="nav-number">4.1.</span> <span class="nav-text">设计问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#差错检测和纠正"><span class="nav-number">4.2.</span> <span class="nav-text">差错检测和纠正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协议"><span class="nav-number">4.3.</span> <span class="nav-text">协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#介质访问控制子层"><span class="nav-number">5.</span> <span class="nav-text">介质访问控制子层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#以太网"><span class="nav-number">5.1.</span> <span class="nav-text">以太网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无线局域网"><span class="nav-number">5.2.</span> <span class="nav-text">无线局域网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据链路层交换"><span class="nav-number">5.3.</span> <span class="nav-text">数据链路层交换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络层"><span class="nav-number">6.</span> <span class="nav-text">网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设计问题-1"><span class="nav-number">6.1.</span> <span class="nav-text">设计问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由算法"><span class="nav-number">6.2.</span> <span class="nav-text">路由算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Internet的网络层"><span class="nav-number">6.3.</span> <span class="nav-text">Internet的网络层</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传输层"><span class="nav-number">7.</span> <span class="nav-text">传输层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#传输服务"><span class="nav-number">7.1.</span> <span class="nav-text">传输服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传输协议的要素"><span class="nav-number">7.2.</span> <span class="nav-text">传输协议的要素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP与TCP"><span class="nav-number">7.3.</span> <span class="nav-text">UDP与TCP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用层"><span class="nav-number">8.</span> <span class="nav-text">应用层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS域名系统"><span class="nav-number">8.1.</span> <span class="nav-text">DNS域名系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#万维网"><span class="nav-number">8.2.</span> <span class="nav-text">万维网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内容分发"><span class="nav-number">8.3.</span> <span class="nav-text">内容分发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络安全"><span class="nav-number">9.</span> <span class="nav-text">网络安全</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aierwa</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
