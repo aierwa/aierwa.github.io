@@ -1,0 +1,771 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Git," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="目的：走一遍Git的工作流程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个小的Git项目实践">
+<meta property="og:url" content="http://yoursite.com/2017/08/27/a-git-demo/index.html">
+<meta property="og:site_name" content="Aierwa | 平凡之路">
+<meta property="og:description" content="目的：走一遍Git的工作流程">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo1.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo2.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo3.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo4.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo5.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo6.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo7.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo8.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo9.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo10.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo11.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo12.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo13.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo14.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo15.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo16.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo17.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo18.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo19.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo20.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo21.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo22.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo23.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/a-git-demo24.jpg">
+<meta property="og:updated_time" content="2017-08-27T14:56:27.042Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个小的Git项目实践">
+<meta name="twitter:description" content="目的：走一遍Git的工作流程">
+<meta name="twitter:image" content="http://yoursite.com/upload/articles/a-git-demo1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/27/a-git-demo/"/>
+
+
+
+
+
+  <title> 一个小的Git项目实践 | Aierwa | 平凡之路 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aierwa | 平凡之路</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-slide">
+          <a href="/slide" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-photo"></i> <br />
+            
+            幻灯片
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/27/a-git-demo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aierwa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/upload/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aierwa | 平凡之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                一个小的Git项目实践
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-27T22:13:51+08:00">
+                2017-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>目的：走一遍Git的工作流程<br><img src="/upload/articles/a-git-demo1.jpg" alt="aierwa" title="Git工作流程"><br><a id="more"></a></p>
+<h2 id="1、新建文件夹并初始化Git项目"><a href="#1、新建文件夹并初始化Git项目" class="headerlink" title="1、新建文件夹并初始化Git项目"></a>1、新建文件夹并初始化Git项目</h2><p><img src="/upload/articles/a-git-demo2.jpg" alt="aierwa"><br>使用<code>git init</code>命令初始化Git项目，默认会创建主分支master。  </p>
+<h2 id="2、新建readme并添加到暂存区index"><a href="#2、新建readme并添加到暂存区index" class="headerlink" title="2、新建readme并添加到暂存区index"></a>2、新建readme并添加到暂存区index</h2><p><img src="/upload/articles/a-git-demo3.jpg" alt="aierwa"><br><img src="/upload/articles/a-git-demo4.jpg" alt="aierwa"><br>使用<code>vim readme</code>新建文件，并输入name: xuxiang，然后使用<code>git add</code>命令将文件添加到暂存区index。  </p>
+<h2 id="3、将改动提交到仓库"><a href="#3、将改动提交到仓库" class="headerlink" title="3、将改动提交到仓库"></a>3、将改动提交到仓库</h2><p><img src="/upload/articles/a-git-demo5.jpg" alt="aierwa"><br>使用<code>git commit</code>命令将暂存区index的改动提交到版本库，-m选项可添加注释，永远建议加上。Mode 100644表示文件类型为100（regular file），文件权限644。此时简单的添加文件并提交的流程就完了。  </p>
+<h2 id="4、改动文件并查看修改"><a href="#4、改动文件并查看修改" class="headerlink" title="4、改动文件并查看修改"></a>4、改动文件并查看修改</h2><p><img src="/upload/articles/a-git-demo6.jpg" alt="aierwa"><br>此时readme添加age行，使用<code>git status</code>命令查看文件状态，它告诉我们改变还没有被准备提交，也就是说改动还没添加到暂存区中，并告诉可以用”git add <file>…”更新即将被提交的内容，或者”git checkout – <file>…”来放弃工作区中的改动。<br><img src="/upload/articles/a-git-demo7.jpg" alt="aierwa"><br>使用<code>git diff</code>命令查看修改，显示格式是Unix通用的diff合并格式。<br><code>--- a/readme</code>表示变动前的版本，<code>+++ b/readme</code>表示变动后的版本。<br><code>@@ -1 +1,2 @@，-1</code>表示修改前是从第1行显示，+1,2表示修改后文件是从第一行开始的连续2行。<br><img src="/upload/articles/a-git-demo8.jpg" alt="aierwa"><br>再次使用<code>git add</code>和<code>git commit</code>命令进行版本提交。  </file></file></p>
+<h2 id="5、查看版本提交历史"><a href="#5、查看版本提交历史" class="headerlink" title="5、查看版本提交历史"></a>5、查看版本提交历史</h2><p>此时我们有两个版本了：1-“add a readme file”；2-“add age”<br><img src="/upload/articles/a-git-demo9.jpg" alt="aierwa"><br>使用<code>git log</code>查看提交历史（<code>--oneline</code>简洁显示），从最近的一次开始显示。<br>commit后面的一串十六进制数字是commit id（版本号）。  </p>
+<h2 id="6、版本回退"><a href="#6、版本回退" class="headerlink" title="6、版本回退"></a>6、版本回退</h2><p>如果对现在的版本不如意，可回到之前的任一版本。在Git中，HEAD是一个指针，表示当前版本。上一个版本用HEAD^表示，上上个版本为HEAD^^，上100个版本为HEAD~100。<br>使用<code>git reset</code>命令回退版本：<br><img src="/upload/articles/a-git-demo10.jpg" alt="aierwa"><br><code>--hard</code>选项重置了工作区和index的所有改变。  </p>
+<p>此时，又想回到第2个版本怎么办？可以<code>git reflog</code>先查看每次的命令：<br><img src="/upload/articles/a-git-demo11.jpg" alt="aierwa"><br>可以找到add age版本的commit id。然后再次重置：<br><img src="/upload/articles/a-git-demo12.jpg" alt="aierwa">  </p>
+<h2 id="7、撤销修改"><a href="#7、撤销修改" class="headerlink" title="7、撤销修改"></a>7、撤销修改</h2><p>撤销修改回到index的状态，用<code>git checkout -- &lt;filename&gt;</code>：<br><img src="/upload/articles/a-git-demo13.jpg" alt="aierwa"><br>如果已经将add到index怎么撤销呢？用<code>git checkout HEAD</code>命令：<br><img src="/upload/articles/a-git-demo14.jpg" alt="aierwa"><br>包括使用<code>rm &lt;filename&gt;</code>命令所做的删除修改操作也可以撤销。  </p>
+<h2 id="8、分支管理"><a href="#8、分支管理" class="headerlink" title="8、分支管理"></a>8、分支管理</h2><p>Git鼓励使用分支，一般不在master上直接操作。<br>创建dev分支，新建test.txt文件：<br><img src="/upload/articles/a-git-demo15.jpg" alt="aierwa"><br>将改动提交到dev分支：<br><img src="/upload/articles/a-git-demo16.jpg" alt="aierwa"><br>将dev分支合并到master：<br><img src="/upload/articles/a-git-demo17.jpg" alt="aierwa"><br>如何合并有冲突的分支？<br>创建feature1分支，修改readme，并提交：<br><img src="/upload/articles/a-git-demo18.jpg" alt="aierwa"><br>切换到主分支，也修改readme，并提交：<br><img src="/upload/articles/a-git-demo19.jpg" alt="aierwa"><br><img src="/upload/articles/a-git-demo20.jpg" alt="aierwa"><br>此时<code>git merge feature1</code>无法进行快速合并：<br><img src="/upload/articles/a-git-demo21.jpg" alt="aierwa"><br>此时readme的内容如下，需要手动修改：<br><img src="/upload/articles/a-git-demo22.jpg" alt="aierwa"><br><img src="/upload/articles/a-git-demo23.jpg" alt="aierwa"><br>可以用<code>git log –graph</code>查看合并情况：<br><img src="/upload/articles/a-git-demo24.jpg" alt="aierwa">  </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag"># Git</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/13/after-reading-professional-javascript-for-web-developers-in-3rd-time-part6/" rel="next" title="【阅读笔记】JavaScript高级程序设计（3rd time）（六）">
+                <i class="fa fa-chevron-left"></i> 【阅读笔记】JavaScript高级程序设计（3rd time）（六）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/upload/avatar.jpg"
+               alt="Aierwa" />
+          <p class="site-author-name" itemprop="name">Aierwa</p>
+           
+              <p class="site-description motion-element" itemprop="description">中不偏，庸不易</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/aierwa" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、新建文件夹并初始化Git项目"><span class="nav-number">1.</span> <span class="nav-text">1、新建文件夹并初始化Git项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、新建readme并添加到暂存区index"><span class="nav-number">2.</span> <span class="nav-text">2、新建readme并添加到暂存区index</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、将改动提交到仓库"><span class="nav-number">3.</span> <span class="nav-text">3、将改动提交到仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、改动文件并查看修改"><span class="nav-number">4.</span> <span class="nav-text">4、改动文件并查看修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、查看版本提交历史"><span class="nav-number">5.</span> <span class="nav-text">5、查看版本提交历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、版本回退"><span class="nav-number">6.</span> <span class="nav-text">6、版本回退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、撤销修改"><span class="nav-number">7.</span> <span class="nav-text">7、撤销修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8、分支管理"><span class="nav-number">8.</span> <span class="nav-text">8、分支管理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aierwa</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
