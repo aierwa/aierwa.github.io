@@ -1,0 +1,934 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Node.js,Redis," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="关于ExpressExpress 是一个基于 Node.js 平台的极简、灵活的 web 应用开发框架。具有丰富的 HTTP快捷方法和任意排列组合的 Connect 中间件，方便的路由管理。
+也就是说，我们可以用express快速的开发出一个node应用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Express入门">
+<meta property="og:url" content="http://yoursite.com/2017/08/28/primer-for-express/index.html">
+<meta property="og:site_name" content="Aierwa | 平凡之路">
+<meta property="og:description" content="关于ExpressExpress 是一个基于 Node.js 平台的极简、灵活的 web 应用开发框架。具有丰富的 HTTP快捷方法和任意排列组合的 Connect 中间件，方便的路由管理。
+也就是说，我们可以用express快速的开发出一个node应用。">
+<meta property="og:updated_time" content="2017-08-28T14:02:31.332Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Express入门">
+<meta name="twitter:description" content="关于ExpressExpress 是一个基于 Node.js 平台的极简、灵活的 web 应用开发框架。具有丰富的 HTTP快捷方法和任意排列组合的 Connect 中间件，方便的路由管理。
+也就是说，我们可以用express快速的开发出一个node应用。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/28/primer-for-express/"/>
+
+
+
+
+
+  <title> Express入门 | Aierwa | 平凡之路 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aierwa | 平凡之路</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-slide">
+          <a href="/slide" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-photo"></i> <br />
+            
+            幻灯片
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/28/primer-for-express/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aierwa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/upload/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aierwa | 平凡之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Express入门
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-28T21:54:28+08:00">
+                2017-08-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="关于Express"><a href="#关于Express" class="headerlink" title="关于Express"></a>关于Express</h2><p>Express 是一个基于 Node.js 平台的极简、灵活的 web 应用开发框架。具有丰富的 HTTP快捷方法和任意排列组合的 Connect 中间件，方便的路由管理。</p>
+<p>也就是说，我们可以用express快速的开发出一个node应用。<br><a id="more"></a></p>
+<h2 id="Express-路由"><a href="#Express-路由" class="headerlink" title="Express 路由"></a>Express 路由</h2><p>路由，指如何定义应用的端点，以及如何响应客户端请求。</p>
+<p>路由结构：app.METHOD(path, [callback…], callback);</p>
+<p>其中，app是express实例（或者Router对象），METHOD是HTTP方法，path是路径，后面的是句柄。</p>
+<h3 id="路由方法"><a href="#路由方法" class="headerlink" title="路由方法"></a>路由方法</h3><p>例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">app.post(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</div><div class="line">	res.send(<span class="string">'POST request to home page'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>其它诸如get等用法一样，特殊方法app.all()响应任何形式的请求：</p>
+<p>另外可以创建链式路由：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.route(<span class="string">'/book'</span>).get(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;).post(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;);</div></pre></td></tr></table></figure>
+<h3 id="路由路径"><a href="#路由路径" class="headerlink" title="路由路径"></a>路由路径</h3><p>可以是字符串、字符串模式、正则。</p>
+<ul>
+<li><p>字符串：<code>&#39;/about&#39;</code></p>
+</li>
+<li><p>字符串模式：</p>
+<ul>
+<li><p><code>&#39;/ab?cd&#39;</code>：匹配acd, abcd</p>
+</li>
+<li><p>‘/ab*cd’：匹配abxxcd, abcd</p>
+</li>
+</ul>
+</li>
+<li><p>正则：</p>
+<ul>
+<li><p><code>/a/</code>：匹配任何带有a的路径</p>
+</li>
+<li><p><code>/.\*fly\$/</code>：匹配butterfly等</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="路由句柄"><a href="#路由句柄" class="headerlink" title="路由句柄"></a>路由句柄</h3><p>即是回调函数，可提供多个，行为类似于中间件，可以调用next()方法略过其他路由函数。</p>
+<h3 id="Express-Router"><a href="#Express-Router" class="headerlink" title="Express.Router()"></a>Express.Router()</h3><p>路由对象，示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//birds.js</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">var</span> router = express.Router();</div><div class="line"></div><div class="line"><span class="comment">// 定义网站主页的路由</span></div><div class="line">router.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">	res.send(<span class="string">'Birds home page'</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 定义 about 页面的路由</span></div><div class="line">router.get(<span class="string">'/about'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">   res.send(<span class="string">'About birds'</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = router;</div></pre></td></tr></table></figure>
+<p>进行路由分发：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//app.js</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> birds = <span class="built_in">require</span>(<span class="string">'./birds'</span>);</div><div class="line"></div><div class="line">...</div><div class="line"></div><div class="line">app.use(<span class="string">'/birds'</span>, birds);</div></pre></td></tr></table></figure></p>
+<p>一个router对象就像一个小的应用一样，能够执行自己的中间件和路由函数。</p>
+<p>它表现得就像中间件本身，所以你可以在app.use()，或者另一个router.use()中作为参数传入。即：<code>app.use(&#39;/birds&#39;, birds)</code></p>
+<p>router也可以使用app的get(), post(), router(), use()等方法。</p>
+<h3 id="响应对象"><a href="#响应对象" class="headerlink" title="响应对象"></a>响应对象</h3><p>res的方法向客户端返回响应，终结请求响应的循环，如果不调用，则客户端的请求就会一直挂起。</p>
+<p><strong>方法：</strong></p>
+<ul>
+<li>res.download()：提示下载文件</li>
+<li>res.end()：终结响应处理流程</li>
+<li>res.json()：发送一个json格式的响应</li>
+<li>res.jsonp()：发送一个支持jsonp的json格式响应</li>
+<li>res.redirect()：重定向请求</li>
+<li>res.render()：渲染视图模板</li>
+<li>res.send()：发送各种类型的响应</li>
+<li>res.sendFile()：以八位字节流的形式发送文件</li>
+<li>res.sendStatus()：设置响应状态码，并将其以字符串形式作为响应体的一部分发送。</li>
+<li>res.cookie()：设置cookie，res.cookie(‘name’, ‘xx’, {maxAge: 900000, httpOnly: true});</li>
+<li>res.clearCookie()：清除cookie</li>
+</ul>
+<p><strong>属性：</strong></p>
+<ul>
+<li>res.locals：一个包含响应对象局部变量的对象，可在模板中使用。</li>
+</ul>
+<h2 id="Express-中间件"><a href="#Express-中间件" class="headerlink" title="Express 中间件"></a>Express 中间件</h2><p>从本质上来说，一个 Express 应用就是在调用各种中间件。</p>
+<p>简单说，中间件（middleware）就是处理HTTP请求的函数，参数为req, res, next。。它最大的特点就是，一个中间件处理完，再传递给下一个中间件。</p>
+<p><strong>中间件功能：</strong></p>
+<ul>
+<li>执行任何代码。（在函数里面）</li>
+<li>修改请求和响应对象。（操作 req, res ）</li>
+<li>终结请求-响应循环。（比如 res.end() ）</li>
+<li>调用堆栈中的下一个中间件。（ next() ）</li>
+</ul>
+<p>切记：如果当前中间件没有终结请求-响应循环，则必须调用 next()方法将控制权交给下一个中间件，否则请求就会挂起。</p>
+<p><strong>中间件种类：</strong></p>
+<ul>
+<li>应用级中间件</li>
+<li>路由级中间件</li>
+<li>错误处理中间件</li>
+<li>内置中间件</li>
+<li>第三方中间件</li>
+</ul>
+<h3 id="应用级中间件"><a href="#应用级中间件" class="headerlink" title="应用级中间件"></a>应用级中间件</h3><p>绑定到app对象，使用 app.use() 和 app.METHOD()。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 没有挂载路径的中间件，应用的每个请求都会执行该中间件</span></div><div class="line">app.use(<span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">   <span class="built_in">console</span>.log(<span class="string">'Time:'</span>, <span class="built_in">Date</span>.now());</div><div class="line">   next();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="路由级中间件"><a href="#路由级中间件" class="headerlink" title="路由级中间件"></a>路由级中间件</h3><p>用法与app类似，用来处理路由请求。</p>
+<h3 id="错误处理中间件"><a href="#错误处理中间件" class="headerlink" title="错误处理中间件"></a>错误处理中间件</h3><p>注意：错误处理中间件有4个参数，即使不需要，都要写在参数中，即err, req, res, next，否则会被认为是常规中间件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">err, req, res, next</span>)</span>&#123;</div><div class="line">   <span class="built_in">console</span>.error(err);</div><div class="line">   res.status(<span class="number">500</span>).send(<span class="string">'something broke!'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>可以定义多个错误处理中间件，next(err)会直接跳过中间的句柄，除了那些用来处理错误的句柄。</p>
+<h3 id="内置中间件"><a href="#内置中间件" class="headerlink" title="内置中间件"></a>内置中间件</h3><p><code>express.static(root, [options])</code>是目前唯一的内置中间件。负责在应用中托管静态资源。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">app.use(express.static(<span class="string">'uploads'</span>));</div><div class="line"><span class="comment">//这样的话可以通过/uploads访问uploads文件夹里面的东西了。</span></div></pre></td></tr></table></figure>
+<h3 id="第三方中间件"><a href="#第三方中间件" class="headerlink" title="第三方中间件"></a>第三方中间件</h3><p>如cookie-parser等等</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> cookieParser = <span class="built_in">require</span>(<span class="string">'cookie-parser'</span>);</div><div class="line"></div><div class="line">app.use(cookieParser());</div></pre></td></tr></table></figure>
+<h3 id="关于next"><a href="#关于next" class="headerlink" title="关于next"></a>关于next</h3><p>我们在定义express中间件函数的时候都会将第三个参数定义为next，next函数主要负责将控制权交给下一个中间件，如果当前中间件没有终结请求，并且next没有被调用，那么请求将被挂起，后边定义的中间件将得不到被执行的机会。</p>
+<p>如果我们定义的中间件终结了本次请求，那就不应该再调用next函数，否则就可能会出问题（比如两个中间件都执行了res.send()就会报错。）</p>
+<h2 id="req-对象"><a href="#req-对象" class="headerlink" title="req 对象"></a>req 对象</h2><p>req 即是 HTTP request 对象，可以获取如查询字符串、参数、请求体、HTTP头等等。</p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ul>
+<li>req.app：正在使用的express实例</li>
+<li>req.baseUrl：挂载在路由实例上的URL路径（比如前面的birds文件就是’/birds’）</li>
+<li><p>req.body：包含提交到请求体中的键值对数据。默认为undefined，使用body-parsering中间件进行解析填充。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> app = <span class="built_in">require</span>(<span class="string">'express'</span>)();</div><div class="line"><span class="keyword">var</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>);</div><div class="line"><span class="keyword">var</span> multer = <span class="built_in">require</span>(<span class="string">'multer'</span>);</div><div class="line"></div><div class="line">app.use(bodyParser.json()); <span class="comment">// for parsing application/json</span></div><div class="line">app.use(bodyParser.urlencoded(&#123; <span class="attr">extended</span>: <span class="literal">true</span> &#125;)); <span class="comment">// for parsing application/x-www-form-urlencoded（基于form表单的请求体）</span></div><div class="line"></div><div class="line">app.use(multer()); <span class="comment">// for parsing multipart/form-data</span></div><div class="line"></div><div class="line">app.post(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</div><div class="line">   <span class="built_in">console</span>.log(req.body);</div><div class="line">   res.json(req.body);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>req.cookie：当使用 cookie-parser中间件后，为一解析后的cookie对象，如果请求中不携带cookie，则为{}。</p>
+</li>
+<li>req.fresh：是否是‘fresh’的，与req.stale相反。</li>
+<li>req.hostname</li>
+<li>req.ip</li>
+<li>req.originalUrl</li>
+<li><p>req.params：路由参数的属性对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// GET /user/tj</span></div><div class="line"></div><div class="line">req.params.name</div><div class="line"></div><div class="line"><span class="comment">// =\&gt; "tj"</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>req.path：URL的path部分，example.com/users?sort=desc，为”/users”</p>
+</li>
+<li>req.protocol：协议</li>
+<li><p>req.query：查询字符串</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// GET /shoes?order=desc&amp;shoe[color]=blue&amp;shoe[type]=converse</span></div><div class="line"></div><div class="line">req.query.order</div><div class="line"></div><div class="line"><span class="comment">// =\&gt; "desc"</span></div><div class="line"></div><div class="line">req.query.shoe.color</div><div class="line"></div><div class="line"><span class="comment">// =\&gt; "blue"</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>req.router：当前的路由</p>
+</li>
+<li>req.secure：等价于 ‘https’ == req.protocol</li>
+<li><p>req.subdomains：子域的数组</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Host: "tobi.ferrets.example.com"</span></div><div class="line"></div><div class="line">req.subdomains</div><div class="line"></div><div class="line"><span class="comment">// =\&gt; ["ferrets", "tobi"]</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>req.xhr：请求头 X-Request-With 设置为 XMLHttpRequest则为true。表示是通过ajax发过来的请求。</p>
+</li>
+</ul>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ul>
+<li>req.accepts(types)：判断是否支持指定的格式（Accept域），req.accepts(‘application/json’);</li>
+<li><p>req.get(field)：获取请求头指定值（不区分大小写），同req.header(field)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">req.get(<span class="string">'content-type'</span>); <span class="comment">//'text/plain'</span></div><div class="line">req.get(<span class="string">'something'</span>); <span class="comment">//undefined</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>req.is(type)：判断是否匹配指定类型（Content-Type域）。</p>
+</li>
+</ul>
+<h2 id="express-session模块"><a href="#express-session模块" class="headerlink" title="express-session模块"></a>express-session模块</h2><p>注意：自1.5.0版本，不再依赖cookie-parser中间件工作，模块可直接通过req/res读写cookie。</p>
+<h3 id="关于session"><a href="#关于session" class="headerlink" title="关于session"></a>关于session</h3><p>目的：实现请求身份验证</p>
+<p>步骤：</p>
+<ol>
+<li>服务器端的产生Session ID</li>
+<li>服务器端和客户端存储Session ID</li>
+<li>从HTTP Header中提取Session ID</li>
+<li>根据Session ID从服务器端的Hash中获取请求者身份信息</li>
+</ol>
+<p>注意：</p>
+<p>session数据并不保存在cookie本身，cookie只存储sessionID，session数据是保存在服务器端的！</p>
+<h3 id="session-options-中的options"><a href="#session-options-中的options" class="headerlink" title="session(options)中的options"></a>session(options)中的options</h3><ul>
+<li>cookie：session ID的cookie对象，默认{ path: ‘/‘, httpOnly: true, secure:false, maxAge: null }.<ul>
+<li>domain：指定Domain Set-Cookie的值</li>
+<li>expires：指定Expires Set-Cookie的日期对象值（建议设置maxAge即可）</li>
+<li>httpOnly：指定HttpOnly Set-Cookie的布尔值，默认为true，此时客户端不能通过document.cookie读取cookie。</li>
+<li>maxAge：设置过期时间（毫秒）</li>
+<li>path：指定 Path Set-Cookie的值，默认为’/‘根域名。</li>
+<li>secure：如果设置为true，则只有HTTPS才会返回cookie给服务器。</li>
+</ul>
+</li>
+<li>genid：产生session ID的函数（第一个参数是req），默认是通过uid-safe库来生产ID的。</li>
+<li>name：在响应对象中设置的session ID cookie的名称，默认’connect.sid’，可以用于区分同一个host的不同app。</li>
+<li>resave：是否强制将session保存至session store</li>
+<li>saveUninitialized：是否强制一个未初始化的session保存到store？？</li>
+<li>secret：用于标志sessionID cookie的秘密？（This is the secret used to sign the session ID cookie）</li>
+<li>store：session store实例，比如new RedisStore(redisOpt)</li>
+</ul>
+<h3 id="req-session"><a href="#req-session" class="headerlink" title="req.session"></a>req.session</h3><p>存储或者读取session，直接通过req.session。</p>
+<p><strong>方法：</strong></p>
+<ul>
+<li>regenerate(callback)</li>
+<li>destory(callback)</li>
+<li>reload(callback)</li>
+<li>save(callback)</li>
+<li>touch()</li>
+</ul>
+<p><strong>属性：</strong></p>
+<ul>
+<li>id：是req.sessionID的别名，不能被修改。</li>
+<li>cookie：让我们可以操作cookie对象，比如设置req.session.cookie.expires为false，使得cookie只保留到浏览器打开期间为止。</li>
+</ul>
+<h2 id="Express中的Redis存储"><a href="#Express中的Redis存储" class="headerlink" title="Express中的Redis存储"></a>Express中的Redis存储</h2><h3 id="关于redis"><a href="#关于redis" class="headerlink" title="关于redis"></a>关于redis</h3><ul>
+<li>Redis是一个基于BSD开源的使用ANSIC语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API.</li>
+<li>做session的持久化，做<strong>缓存层</strong>。</li>
+<li>使用数据库来集中管理session，存放Session内容，并在各个子域名跨域共享Cookies(SessionID)，即可实现为每一个子域分配一个独立的node.js Web服务器，各个服务程序均可依据sessionid从数据库中寻找到同一Session，从而实现不同Web Server中的会话同步，从而实现一定程度上的<strong>负载均衡</strong>。</li>
+<li>另外，当你的Express服务器突然重启后，用户仍然可以使用当前Cookie中的SessionID从数据库中获取到他的会话状态，做到会话不丢失，在一定程度上提高网站的键壮性。</li>
+<li>如果你的NodeJS网站上的所有缓存数据都转移到了Redis后，就可做到完全状态无关，按需扩展网站的规模。</li>
+</ul>
+<h3 id="Redis-express-session"><a href="#Redis-express-session" class="headerlink" title="Redis + express + session"></a>Redis + express + session</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> session = <span class="built_in">require</span>(<span class="string">'express-session'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> RedisStore = <span class="built_in">require</span>(<span class="string">'connect-redis'</span>)(session);</div><div class="line"></div><div class="line"><span class="keyword">var</span> store = <span class="keyword">new</span> RedisStore(redisOption);</div><div class="line"></div><div class="line">app.use(session(&#123;</div><div class="line">   <span class="attr">store</span>: store,</div><div class="line">   <span class="attr">resave</span>: <span class="literal">true</span>,<span class="comment">//每次请求都重置session cookie</span></div><div class="line">   saveUninitialized: <span class="literal">false</span>,<span class="comment">//没有session cookie，则不重新设置，默认无论如何都会重新设置cookie</span></div><div class="line">   secret: <span class="string">'keyboard cat'</span>,</div><div class="line">   <span class="attr">name</span>: <span class="string">'portal'</span></div><div class="line">&#125;));</div></pre></td></tr></table></figure>
+<p>上面的语句用于实现session存储在redis服务器上</p>
+<p>对于redisOption的参数：</p>
+<ul>
+<li>client：现有的客户端</li>
+<li>host：Redis服务器主机名</li>
+<li>port：端口号</li>
+<li>socket：unix_socket</li>
+<li>url：地址</li>
+</ul>
+<p>以及可选的：</p>
+<ul>
+<li>ttl：过期时间（秒），默认等于session.maxAge</li>
+<li>disableTTL：禁用设置的ttl</li>
+<li>db：数据库索引，默认为0</li>
+<li>pass：密码</li>
+<li>prefix：前缀，键的前缀默认’sess:’？</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+          
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/27/a-git-demo/" rel="next" title="一个小的Git项目实践">
+                <i class="fa fa-chevron-left"></i> 一个小的Git项目实践
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/upload/avatar.jpg"
+               alt="Aierwa" />
+          <p class="site-author-name" itemprop="name">Aierwa</p>
+           
+              <p class="site-description motion-element" itemprop="description">中不偏，庸不易</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/aierwa" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于Express"><span class="nav-number">1.</span> <span class="nav-text">关于Express</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Express-路由"><span class="nav-number">2.</span> <span class="nav-text">Express 路由</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#路由方法"><span class="nav-number">2.1.</span> <span class="nav-text">路由方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由路径"><span class="nav-number">2.2.</span> <span class="nav-text">路由路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由句柄"><span class="nav-number">2.3.</span> <span class="nav-text">路由句柄</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Express-Router"><span class="nav-number">2.4.</span> <span class="nav-text">Express.Router()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应对象"><span class="nav-number">2.5.</span> <span class="nav-text">响应对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Express-中间件"><span class="nav-number">3.</span> <span class="nav-text">Express 中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用级中间件"><span class="nav-number">3.1.</span> <span class="nav-text">应用级中间件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由级中间件"><span class="nav-number">3.2.</span> <span class="nav-text">路由级中间件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误处理中间件"><span class="nav-number">3.3.</span> <span class="nav-text">错误处理中间件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内置中间件"><span class="nav-number">3.4.</span> <span class="nav-text">内置中间件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三方中间件"><span class="nav-number">3.5.</span> <span class="nav-text">第三方中间件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于next"><span class="nav-number">3.6.</span> <span class="nav-text">关于next</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#req-对象"><span class="nav-number">4.</span> <span class="nav-text">req 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性"><span class="nav-number">4.1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">4.2.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#express-session模块"><span class="nav-number">5.</span> <span class="nav-text">express-session模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于session"><span class="nav-number">5.1.</span> <span class="nav-text">关于session</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session-options-中的options"><span class="nav-number">5.2.</span> <span class="nav-text">session(options)中的options</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#req-session"><span class="nav-number">5.3.</span> <span class="nav-text">req.session</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Express中的Redis存储"><span class="nav-number">6.</span> <span class="nav-text">Express中的Redis存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于redis"><span class="nav-number">6.1.</span> <span class="nav-text">关于redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis-express-session"><span class="nav-number">6.2.</span> <span class="nav-text">Redis + express + session</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aierwa</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
