@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Aierwa, blog" />
+  <meta name="keywords" content="Node.js," />
 
 
 
@@ -87,16 +87,18 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="description" content="debug，一个小巧的JS调试工具，可以用在Node.js和浏览器端。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2017/03/28/hello-world/index.html">
+<meta property="og:title" content="使用npm模块——debug">
+<meta property="og:url" content="http://yoursite.com/2017/09/03/use-npm-debug/index.html">
 <meta property="og:site_name" content="Aierwa | 平凡之路">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
-<meta property="og:updated_time" content="2017-03-31T09:39:23.266Z">
+<meta property="og:description" content="debug，一个小巧的JS调试工具，可以用在Node.js和浏览器端。">
+<meta property="og:image" content="http://yoursite.com/upload/articles/use-npm-debug.jpg">
+<meta property="og:updated_time" content="2017-09-03T07:22:29.869Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="twitter:title" content="使用npm模块——debug">
+<meta name="twitter:description" content="debug，一个小巧的JS调试工具，可以用在Node.js和浏览器端。">
+<meta name="twitter:image" content="http://yoursite.com/upload/articles/use-npm-debug.jpg">
 
 
 
@@ -124,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/28/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/09/03/use-npm-debug/"/>
 
 
 
 
 
-  <title> Hello World | Aierwa | 平凡之路 </title>
+  <title> 使用npm模块——debug | Aierwa | 平凡之路 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -269,7 +271,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/28/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/03/use-npm-debug/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aierwa">
@@ -290,7 +292,7 @@
             
             
               
-                Hello World
+                使用npm模块——debug
               
             
           </h1>
@@ -305,8 +307,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-28T13:45:13+08:00">
-                2017-03-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-03T15:02:54+08:00">
+                2017-09-03
               </time>
             
 
@@ -315,6 +317,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -341,16 +365,21 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.<br><a id="more"></a></p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
+        <p><img src="/upload/articles/use-npm-debug.jpg" alt="aierwa" title="debug"><br><a href="https://www.npmjs.com/package/debug" target="_blank" rel="external">debug</a>，一个小巧的JS调试工具，可以用在Node.js和浏览器端。</p>
+<a id="more"></a>
+<p>主要介绍Node.js中的使用。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install debug --save-dev</div></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><strong>情况1</strong>：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var debug = require('debug)('http');</div><div class="line">debug('hello');	//http hello +0ms</div></pre></td></tr></table></figure>
+<p><strong>情况2</strong>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> foo = <span class="built_in">require</span>(<span class="string">'debug'</span>)(<span class="string">'app:foo'</span>);</div><div class="line">foo(<span class="string">'hello'</span>);	<span class="comment">//app:foo hello +10ms</span></div></pre></td></tr></table></figure>
+<p><strong>情况3</strong>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> debug = <span class="built_in">require</span>(<span class="string">'debug'</span>);</div><div class="line"><span class="keyword">var</span> a = debug(<span class="string">'worker:a'</span>);</div><div class="line"><span class="keyword">var</span> b = debug(<span class="string">'worker:b'</span>);</div><div class="line">a(<span class="string">'hello'</span>);	<span class="comment">//worker:a hello</span></div><div class="line">b(<span class="string">'hello'</span>);	<span class="comment">//worker:b hello</span></div></pre></td></tr></table></figure>
+<h2 id="DEBUG环境变量设置"><a href="#DEBUG环境变量设置" class="headerlink" title="DEBUG环境变量设置"></a>DEBUG环境变量设置</h2><p>在项目根目录，根据你想要输出的debug信息来设置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> DEBUG=*,-not_this	<span class="comment">#所有debug</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> DEBUG=http,-not_this 	<span class="comment">#只输出上面情况1的信息</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> DEBUG=worker:*,-not_this 	<span class="comment">#只输出上面情况3的信息</span></div></pre></td></tr></table></figure>
+<h2 id="正常执行"><a href="#正常执行" class="headerlink" title="正常执行"></a>正常执行</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node app</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -377,6 +406,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+          
+        </div>
+      
 
       
         
@@ -386,14 +421,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/08/28/primer-for-express/" rel="next" title="Express入门">
+                <i class="fa fa-chevron-left"></i> Express入门
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/31/about-my-blog/" rel="prev" title="我的博客">
-                我的博客 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/09/03/primer-for-socket-io/" rel="prev" title="Socket.IO 入门">
+                Socket.IO 入门 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -534,7 +573,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DEBUG环境变量设置"><span class="nav-number">3.</span> <span class="nav-text">DEBUG环境变量设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正常执行"><span class="nav-number">4.</span> <span class="nav-text">正常执行</span></a></li></ol></div>
             
 
           </div>

@@ -1,0 +1,804 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Node.js,socket," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="参考：
+
+WebSocket与Socket.IO
+Socket与WebSocket
+
+Socket网络应用中，两个应用程序同时需要向对方发送消息的能力（即全双工通信），所利用到的技术就是socket，其能够提供端对端的通信。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Socket.IO 入门">
+<meta property="og:url" content="http://yoursite.com/2017/09/03/primer-for-socket-io/index.html">
+<meta property="og:site_name" content="Aierwa | 平凡之路">
+<meta property="og:description" content="参考：
+
+WebSocket与Socket.IO
+Socket与WebSocket
+
+Socket网络应用中，两个应用程序同时需要向对方发送消息的能力（即全双工通信），所利用到的技术就是socket，其能够提供端对端的通信。">
+<meta property="og:image" content="http://yoursite.com/upload/articles/primer-for-socketio.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/primer-for-socketio1.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/primer-for-socketio2.jpg">
+<meta property="og:image" content="http://yoursite.com/upload/articles/primer-for-socketio3.png">
+<meta property="og:updated_time" content="2017-09-03T08:06:01.852Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Socket.IO 入门">
+<meta name="twitter:description" content="参考：
+
+WebSocket与Socket.IO
+Socket与WebSocket
+
+Socket网络应用中，两个应用程序同时需要向对方发送消息的能力（即全双工通信），所利用到的技术就是socket，其能够提供端对端的通信。">
+<meta name="twitter:image" content="http://yoursite.com/upload/articles/primer-for-socketio.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/03/primer-for-socket-io/"/>
+
+
+
+
+
+  <title> Socket.IO 入门 | Aierwa | 平凡之路 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aierwa | 平凡之路</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-slide">
+          <a href="/slide" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-photo"></i> <br />
+            
+            幻灯片
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/03/primer-for-socket-io/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aierwa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/upload/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aierwa | 平凡之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Socket.IO 入门
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-03T15:27:33+08:00">
+                2017-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/upload/articles/primer-for-socketio.jpg" alt="aierwa" title="Socket.IO"></p>
+<p>参考：</p>
+<ol>
+<li><a href="https://zhuanlan.zhihu.com/p/23467317" target="_blank" rel="external">WebSocket与Socket.IO</a></li>
+<li><a href="https://blog.zengrong.net/post/2199.html" target="_blank" rel="external">Socket与WebSocket</a></li>
+</ol>
+<h2 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h2><p>网络应用中，两个应用程序同时需要向对方发送消息的能力（即全双工通信），所利用到的技术就是<strong>socket</strong>，其能够提供<strong>端对端的通信</strong>。</p>
+<a id="more"></a>
+<p>Socket其实<strong>并不是一个协议</strong>。它工作在OSI模型会话层（第5层），是为了方便大家直接使用更底层协议（一般是TCP或UDP）而存在的一个抽象层。最早的一套SocketAPI是Berkeley sockets ，采用 C 语言实现。它是Socket的事实标准。</p>
+<p>需要在 A 端创建一个socket实例，并为这个实例提供其所要连接的 B 端的 IP 地址和端口号，而在 B 端创建另一个socket实例，并且绑定本地端口号来进行监听。当A和B建立连接后，双方就建立了一个端对端的TCP连接，从而可以进行双向通信。</p>
+<h2 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h2><p>WebSocket是<strong>HTML5</strong>标准的一部分。它其借鉴了socket的思想，为client和server之间提供了类似的双向通信机制。是一个完整的应用层协议，包含一套标准的API。</p>
+<p><strong>产生背景：</strong></p>
+<p>以前的推送机制：</p>
+<p>（1）<strong>（短）轮询</strong>（Polling）</p>
+<p><img src="/upload/articles/primer-for-socketio1.jpg" alt="aierwa"></p>
+<p>这种方式下，client 每隔一段时间都会向 server 发送 http 请求，服务器收到请求后，将最新的数据发回给 client。<strong>弊端：</strong>比如在某个时间段 server 没有更新数据，但 client 仍然每隔一段时间发送请求来询问，所以这段时间内的询问都是无效的，这样<strong>浪费了网络带宽</strong>。将发送请求的间隔时间加大会缓解这种浪费，但如果 server 更新数据很快时，这样又<strong>不能满足数据的实时性。</strong></p>
+<p>（2）长轮询（Long-polling）</p>
+<p><img src="/upload/articles/primer-for-socketio2.jpg" alt="aierwa"></p>
+<p>client 向 server 发出请求，server 接收到请求后，server 并不一定立即发送回应给client，而是看数据是否更新，如果数据已经更新了的话，那就立即将数据返回给client；但如果数据没有更新，那就把这个请求保持住，等待有新的数据到来时，才将数据返回给client。<strong>弊端：</strong>当 server 向 client发送数据后，必须等待下一次请求才能将新的数据发送出去，这样 client接收到新数据的间隔最短时间便是 2 * RTT（往返时间），这样便无法应对 server端数据更新频率较快的情况。它是一个可行的技术，但它不能优化发送的信息。也就是说，它是一个解决方案，但不是最佳的技术方案。</p>
+<p><strong>所以：</strong></p>
+<p>想要解决的唯一的问题便是怎么让 server 将最新的数据以最快的速度发送给 client。但HTTP 是个懒惰的协议，server只有收到请求才会做出回应，否则什么事都不干。因此，为了彻底解决这个 server 主动向 client 发送数据的问题，设计了WebSocket。</p>
+<p><img src="/upload/articles/primer-for-socketio3.png" alt="aierwa"></p>
+<p>WebSocket 是一种长连接的模式，就是一旦 WebSocket 连接建立后，除非 client 或者<br>server 中有一端主动断开连接。</p>
+<h2 id="Socket-IO"><a href="#Socket-IO" class="headerlink" title="Socket.IO"></a>Socket.IO</h2><p>Socket.IO 是一个封装了 Websocket、基于 Node 的 JavaScript 框架，包含 client 的<br>JavaScript 和 server 的 Node。</p>
+<p>另外，Socket.IO 还有一个非常重要的好处。其不仅支持WebSocket，还支持许多种轮询机制以及其他实时通信方式，并封装了通用的接口。这些方式包含Adobe Flash Socket、Ajax 长轮询、Ajax multipart streaming 、持久 Iframe、JSONP轮询等。换句话说，<strong>当 Socket.IO 检测到当前环境不支持 WebSocket时，能够自动地选择最佳的方式来实现网络的实时通信</strong>。</p>
+<h3 id="Socket-IO使用示例"><a href="#Socket-IO使用示例" class="headerlink" title="Socket.IO使用示例"></a>Socket.IO使用示例</h3><p><strong>Node端：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//app.js</span></div><div class="line"><span class="keyword">var</span> app = <span class="built_in">require</span>(<span class="string">'express'</span>)();</div><div class="line"><span class="keyword">var</span> server = <span class="built_in">require</span>(<span class="string">'http'</span>).Server(app);</div><div class="line"><span class="keyword">var</span> io = <span class="built_in">require</span>(<span class="string">'socket.io'</span>)(server);</div><div class="line"></div><div class="line"><span class="keyword">var</span> myIO = <span class="built_in">require</span>(‘modules/myIO’);</div><div class="line"></div><div class="line">server.listen(<span class="number">80</span>);</div><div class="line"></div><div class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</div><div class="line">	res.sendfile(__dirname + <span class="string">'/index.html'</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">myIO(io);</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//myIO.js</span></div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">io</span>) </span>&#123;</div><div class="line">	io.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">socket</span>) </span>&#123; <span class="comment">//建立连接时</span></div><div class="line">		socket.emit(<span class="string">'news'</span>, &#123; <span class="attr">hello</span>: <span class="string">'world'</span> &#125;); <span class="comment">//服务端发射消息</span></div><div class="line"></div><div class="line">		socket.on(<span class="string">'my other event'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123; <span class="comment">//服务端监听客户端的消息</span></div><div class="line">			<span class="built_in">console</span>.log(data);</div><div class="line">		&#125;);</div><div class="line">	&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>浏览器端：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--index.html--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/socket.io/socket.io.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">var</span> socket = io.connect();</div><div class="line"></div><div class="line">socket.on(<span class="string">'news'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(data);</div><div class="line">	socket.emit(<span class="string">'my other event'</span>, &#123; <span class="attr">my</span>: <span class="string">'data'</span> &#125;);</div><div class="line">&#125;);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="一些API"><a href="#一些API" class="headerlink" title="一些API"></a>一些API</h3><h4 id="命名空间namespace"><a href="#命名空间namespace" class="headerlink" title="命名空间namespace"></a>命名空间namespace</h4><p>允许你给你的sockets定义命名空间</p>
+<p>默认命名空间为’/‘，通过’io.sockets’或’io’来标识。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// the following two will emit to all the sockets connected to \`/\`</span></div><div class="line"></div><div class="line">io.sockets.emit(<span class="string">'hi'</span>, <span class="string">'everyone'</span>);</div><div class="line"></div><div class="line">io.emit(<span class="string">'hi'</span>, <span class="string">'everyone'</span>); <span class="comment">// short form</span></div></pre></td></tr></table></figure>
+<p><strong>自定义命名空间：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> nsp = io.of(<span class="string">'/my-namespace'</span>);</div><div class="line"></div><div class="line">nsp.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">socket</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'someone connected'</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">nsp.emit(<span class="string">'hi'</span>, <span class="string">'everyone!'</span>);</div></pre></td></tr></table></figure>
+<p>客户端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var socket = io(&apos;/my-namespace&apos;);</div></pre></td></tr></table></figure>
+<h4 id="房间-room"><a href="#房间-room" class="headerlink" title="房间 room"></a>房间 room</h4><p>在每个命名空间里，可以让sockets<strong>加入或离开某个频道（房间）</strong></p>
+<p>使用join方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">io.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">socket</span>)</span>&#123;</div><div class="line">	socket.join(<span class="string">'some room'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>然后通过to/in方法简单的向某个房间发送消息：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">io.to(<span class="string">'some room'</span>).emit(<span class="string">'some event'</span>);</div></pre></td></tr></table></figure>
+<p>注意：默认的，每个socket都会<strong>加入一个以该socket的id标识的房间</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">io.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">socket</span>)</span>&#123;</div><div class="line">	socket.on(<span class="string">'say to someone'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">id, msg</span>)</span>&#123;</div><div class="line">		socket.broadcast.to(id).emit(<span class="string">'my message'</span>, msg);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h4><p>通过中间件来处理每个连接的socket。</p>
+<p>比如给socket加上当前session（假设使用redis）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">io.use(<span class="function"><span class="keyword">function</span>(<span class="params">socket, next</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> data = socket.handshake \|\| socket.request;</div><div class="line">	<span class="keyword">if</span> (data.headers.cookie) &#123;</div><div class="line">		<span class="keyword">var</span> cooStr = data.headers.cookie; <span class="comment">//客户端传过来的原始cookie</span></div><div class="line">		<span class="keyword">var</span> cooObj = cookie.parse(cooStr); <span class="comment">//调用cookie模块，解析为cookie对象</span></div><div class="line"></div><div class="line">		<span class="comment">//调用cookieParser中间件，解析签名的cookie值，[COOKIE_KEY]默认为'connect.sid'</span></div><div class="line">		<span class="keyword">var</span> unsignedSessionID = cookieParser.signedCookie(cooObj[COOKIE_KEY], COOKIE_SECRET);</div><div class="line"></div><div class="line">		<span class="comment">//根据session id在redis里面获取对应的session数据，赋值给socket.handshake</span></div><div class="line">		store.get(unsignedSessionID, <span class="function"><span class="keyword">function</span> (<span class="params">err, session</span>) </span>&#123;</div><div class="line">			<span class="keyword">if</span> (err \|\| !session) &#123;</div><div class="line">				<span class="keyword">return</span> next(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'no sesseion'</span>));</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				data.session = session;</div><div class="line">				data.session.id = unsignedSessionID;</div><div class="line">			&#125;	</div><div class="line">		&#125;)</div><div class="line">	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+          
+            <a href="/tags/socket/" rel="tag"># socket</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/03/use-npm-debug/" rel="next" title="使用npm模块——debug">
+                <i class="fa fa-chevron-left"></i> 使用npm模块——debug
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/upload/avatar.jpg"
+               alt="Aierwa" />
+          <p class="site-author-name" itemprop="name">Aierwa</p>
+           
+              <p class="site-description motion-element" itemprop="description">中不偏，庸不易</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/aierwa" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Socket"><span class="nav-number">1.</span> <span class="nav-text">Socket</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebSocket"><span class="nav-number">2.</span> <span class="nav-text">WebSocket</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Socket-IO"><span class="nav-number">3.</span> <span class="nav-text">Socket.IO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Socket-IO使用示例"><span class="nav-number">3.1.</span> <span class="nav-text">Socket.IO使用示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些API"><span class="nav-number">3.2.</span> <span class="nav-text">一些API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#命名空间namespace"><span class="nav-number">3.2.1.</span> <span class="nav-text">命名空间namespace</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#房间-room"><span class="nav-number">3.2.2.</span> <span class="nav-text">房间 room</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#中间件"><span class="nav-number">3.2.3.</span> <span class="nav-text">中间件</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aierwa</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
