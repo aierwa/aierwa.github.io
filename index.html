@@ -270,6 +270,173 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/05/plugin-bootstrap-paginator-practice/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aierwa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/upload/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aierwa | 平凡之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/09/05/plugin-bootstrap-paginator-practice/" itemprop="url">
+                  bootstrap-paginator插件实践
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-05T21:58:19+08:00">
+                2017-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>bootstrap-paginator是bootstrap的分页插件。</p>
+<p>此文进行使用实践。</p>
+<h2 id="依赖引入"><a href="#依赖引入" class="headerlink" title="依赖引入"></a>依赖引入</h2><p><strong>javascript：</strong></p>
+<ul>
+<li>jquery.js</li>
+<li>bootstrap-paginator.js</li>
+</ul>
+<p><strong>css：</strong></p>
+<ul>
+<li>bootstrap.css</li>
+</ul>
+<h2 id="分页思路"><a href="#分页思路" class="headerlink" title="分页思路"></a>分页思路</h2><ul>
+<li>后端分页：前端显示第一页的10条数据，则请求后端去数据库查询符合条件的前10条；若需要显示第二页的10条数据，则请求后端去数据库查询符合条件的第11-20的10条数据。</li>
+<li>前端分页：一次性请求完所有符合条件的数据，保存在数组中，前端的每次分页都从这个数组里面去取出。</li>
+</ul>
+<p>本文的分页基于后端分页。</p>
+<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><h3 id="1-HTML中创建table"><a href="#1-HTML中创建table" class="headerlink" title="1. HTML中创建table"></a>1. HTML中创建table</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">class</span>=<span class="string">"table table-striped"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">thead</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>插件名称<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>插件版本<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>插件大小<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>创建时间<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>任务类型<span class="tag">&lt;/<span class="name">th</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">tbody</span> <span class="attr">id</span>=<span class="string">"tbody"</span>&gt;</span><span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="2-创建分页按钮组件元素"><a href="#2-创建分页按钮组件元素" class="headerlink" title="2. 创建分页按钮组件元素"></a>2. 创建分页按钮组件元素</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;table class=&quot;table table-striped&quot;&gt;</div><div class="line">  &lt;thead&gt;</div><div class="line">    &lt;th&gt;插件名称&lt;/th&gt;</div><div class="line">    &lt;th&gt;插件版本&lt;/th&gt;</div><div class="line">    &lt;th&gt;插件大小&lt;/th&gt;</div><div class="line">    &lt;th&gt;创建时间&lt;/th&gt;</div><div class="line">    &lt;th&gt;任务类型&lt;/th&gt;</div><div class="line">  &lt;/thead&gt;</div><div class="line">  &lt;tbody id=&quot;tbody&quot;&gt;&lt;/tbody&gt;</div><div class="line">&lt;/table&gt;</div><div class="line"></div><div class="line">&lt;ul class=&quot;page-box&quot; style=&quot;float: right; margin-right: 30px;&quot;&gt;&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<h3 id="3-创建填充数据的模板函数"><a href="#3-创建填充数据的模板函数" class="headerlink" title="3. 创建填充数据的模板函数"></a>3. 创建填充数据的模板函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fillTable</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">  <span class="comment">//需为数组形式的数据</span></div><div class="line">  <span class="keyword">if</span> (!<span class="built_in">Array</span>.isArray(data)) <span class="keyword">return</span>;</div><div class="line">  <span class="keyword">var</span> tbody = $(<span class="string">'#tbody'</span>),</div><div class="line">      html = <span class="string">''</span>, i, len, item;</div><div class="line">  <span class="comment">//构建数据字符串（与后端返回的数据属性对应）</span></div><div class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>, len = data.length; i &lt; len; i++) &#123;</div><div class="line">      item = data[i];</div><div class="line">      html += <span class="string">'&lt;tr&gt;'</span> +</div><div class="line">              <span class="string">'&lt;td&gt;'</span> + item.name + <span class="string">'&lt;/td&gt;'</span> +</div><div class="line">              <span class="string">'&lt;td&gt;'</span> + item.version + <span class="string">'&lt;/td&gt;'</span> +</div><div class="line">              <span class="string">'&lt;td&gt;'</span> + item.size + <span class="string">'&lt;/td&gt;'</span> +</div><div class="line">              <span class="string">'&lt;td&gt;'</span> + item.createTime + <span class="string">'&lt;/td&gt;'</span> +</div><div class="line">              <span class="string">'&lt;td&gt;'</span> + item.action + <span class="string">'&lt;/td&gt;'</span> +</div><div class="line">              <span class="string">'&lt;/tr&gt;'</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="comment">//添加到tbody里面</span></div><div class="line">  tbody.html(html);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="4-创建-paging-函数"><a href="#4-创建-paging-函数" class="headerlink" title="4. 创建 paging() 函数"></a>4. 创建 paging() 函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//必须定义此函数</span></div><div class="line"><span class="comment">//参数page为点击的第几页，比如当前页为2，点击下一页则此时page为3。</span></div><div class="line"><span class="comment">//此函数意思是，每当翻页时，即发送一个ajax请求（带了一个当前page的参数）。请求成功则填充数据。</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">paging</span>(<span class="params">page</span>) </span>&#123;</div><div class="line">  $.ajax(&#123;</div><div class="line">    <span class="attr">method</span>: <span class="string">'post'</span>,</div><div class="line">    <span class="comment">//请求数据的地址</span></div><div class="line">    url: <span class="string">'/plugin/getSilenceList?page='</span> + page,</div><div class="line">    <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span> (data) &#123;</div><div class="line">        <span class="comment">//这里的data要和后台返回的数据要对应好，保证fillTable的参数即为数组形式的数据。</span></div><div class="line">        fillTable(data.data);</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'no data...'</span>);</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">error</span>: <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(err);</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="5-后端分页操作（Node）"><a href="#5-后端分页操作（Node）" class="headerlink" title="5. 后端分页操作（Node）"></a>5. 后端分页操作（Node）</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//路由</span></div><div class="line">router.post(<span class="string">'/getSilenceList'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> totalPage, currentPage, itemsOfPage = <span class="number">10</span>;</div><div class="line">	<span class="comment">//获取查询字符串的值</span></div><div class="line">    currentPage = +req.query.page || <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="comment">//模拟的数据（真实的可能去数据库查找）</span></div><div class="line">    <span class="keyword">var</span> arr = [], i, items = <span class="number">26</span>, ret = [];</div><div class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; items; i++) &#123;</div><div class="line">        arr.push(&#123;</div><div class="line">            <span class="attr">name</span>: <span class="string">'Plugin-'</span> + i,</div><div class="line">            <span class="attr">version</span>: <span class="string">'2.2.0'</span>,</div><div class="line">            <span class="attr">size</span>: <span class="string">'20KB'</span>,</div><div class="line">            <span class="attr">createTime</span>: +<span class="keyword">new</span> <span class="built_in">Date</span>() - <span class="built_in">Math</span>.random()*(<span class="number">1000</span>*<span class="number">60</span>*<span class="number">60</span>*<span class="number">24</span>*<span class="number">7</span>),</div><div class="line">            <span class="attr">action</span>: <span class="string">'插件安装'</span></div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    totalPage = <span class="built_in">Math</span>.ceil(arr.length / itemsOfPage);</div><div class="line">    ret = arr.slice(itemsOfPage * (currentPage - <span class="number">1</span>), itemsOfPage * currentPage);</div><div class="line">    <span class="keyword">var</span> obj = &#123;</div><div class="line">        <span class="attr">data</span>: ret,</div><div class="line">        <span class="attr">totalPage</span>: totalPage	<span class="comment">//返回一个总页数</span></div><div class="line">    &#125;;</div><div class="line">    res.send(obj);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="6-初始化分页组件"><a href="#6-初始化分页组件" class="headerlink" title="6. 初始化分页组件"></a>6. 初始化分页组件</h3><p>如果需要进入页面则显示第一页数据，则可进入时就进行一次ajax请求，并初始化分页组件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  $.ajax(&#123;</div><div class="line">    <span class="attr">method</span>: <span class="string">'post'</span>,</div><div class="line">    <span class="attr">url</span>: <span class="string">'/plugin/getSilenceList?page=1'</span>,</div><div class="line">    <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span> (data.data.length) &#123;</div><div class="line">        <span class="comment">//填充表格数据</span></div><div class="line">        fillTable(data.data);</div><div class="line"></div><div class="line">        <span class="comment">//初始化分页按钮组件</span></div><div class="line">        $(<span class="string">'.page-box'</span>).bootstrapPaginator(&#123;</div><div class="line">          <span class="attr">bootstrapMajorVersion</span>: <span class="number">3</span>,	<span class="comment">//boostrap版本，记得加上（必须）</span></div><div class="line">          currentPage: <span class="number">1</span>,  <span class="comment">//当前页（必须）</span></div><div class="line">          totalPages: data.totalPage,  <span class="comment">//总页数（必须）</span></div><div class="line">          numberOfPages: <span class="number">3</span>,  <span class="comment">//显示的页数（默认5）</span></div><div class="line">          alignment: <span class="string">'center'</span>  <span class="comment">//放置（没有效果？）</span></div><div class="line">        &#125;);</div><div class="line"></div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'no data...'</span>);</div><div class="line">         displayNoData();</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">error</span>: <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(err);</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="7-效果"><a href="#7-效果" class="headerlink" title="7. 效果"></a>7. 效果</h3><p><img src="/upload/articles/plugin-bootstrap-paginator-practice.png" alt="aierwa" title="分页效果"></p>
+<h2 id="前端javascript的完整部分"><a href="#前端javascript的完整部分" class="headerlink" title="前端javascript的完整部分"></a>前端javascript的完整部分</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">paging</span>(<span class="params">page</span>) </span>&#123;</div><div class="line">        $.ajax(&#123;</div><div class="line">            <span class="attr">method</span>: <span class="string">'post'</span>,</div><div class="line">            <span class="attr">url</span>: <span class="string">'/plugin/getSilenceList?page='</span> + page,</div><div class="line">            <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">                <span class="keyword">if</span> (data) &#123;</div><div class="line">                    fillTable(data.data);</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="built_in">console</span>.log(<span class="string">'no data...'</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;,</div><div class="line">            <span class="attr">error</span>: <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</div><div class="line">                <span class="built_in">console</span>.log(err);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fillTable</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!<span class="built_in">Array</span>.isArray(data)) <span class="keyword">return</span>;</div><div class="line">        <span class="keyword">var</span> tbody = $(<span class="string">'#tbody-silence'</span>),</div><div class="line">            html = <span class="string">''</span>, i, len, item;</div><div class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>, len = data.length; i &lt; len; i++) &#123;</div><div class="line">            item = data[i];</div><div class="line">            html += <span class="string">'&lt;tr&gt;'</span> +</div><div class="line">                <span class="string">'&lt;td&gt;'</span> + item.name + <span class="string">'&lt;/td&gt;'</span> +</div><div class="line">                <span class="string">'&lt;td&gt;'</span> + item.version + <span class="string">'&lt;/td&gt;'</span> +</div><div class="line">                <span class="string">'&lt;td&gt;'</span> + item.size + <span class="string">'&lt;/td&gt;'</span> +</div><div class="line">                <span class="string">'&lt;td&gt;'</span> + $.formatTime(item.createTime) + <span class="string">'&lt;/td&gt;'</span> +</div><div class="line">                <span class="string">'&lt;td&gt;'</span> + item.action + <span class="string">'&lt;/td&gt;'</span> +</div><div class="line">                <span class="string">'&lt;/tr&gt;'</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        tbody.html(html);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">//初始获取列表第一页</span></div><div class="line">    $.ajax(&#123;</div><div class="line">        <span class="attr">method</span>: <span class="string">'post'</span>,</div><div class="line">        <span class="attr">url</span>: <span class="string">'/plugin/getSilenceList?page=1'</span>,</div><div class="line">        <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (data.data.length) &#123;</div><div class="line">                <span class="comment">//填充表格数据</span></div><div class="line">                fillTable(data.data);</div><div class="line"></div><div class="line">                <span class="comment">//显示分页按钮组件</span></div><div class="line">                $(<span class="string">'.page-box'</span>).bootstrapPaginator(&#123;</div><div class="line">                    <span class="attr">bootstrapMajorVersion</span>: <span class="number">3</span>,</div><div class="line">                    <span class="attr">currentPage</span>: <span class="number">1</span>,</div><div class="line">                    <span class="attr">totalPages</span>: data.totalPage,</div><div class="line">                    <span class="attr">numberOfPages</span>: <span class="number">3</span>,</div><div class="line">                    <span class="attr">alignment</span>: <span class="string">'center'</span></div><div class="line">                &#125;);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="built_in">console</span>.log(<span class="string">'no data...'</span>);</div><div class="line">                displayNoData();</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">error</span>: <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(err);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/03/primer-for-socket-io/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1657,154 +1824,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/12/after-reading-professional-javascript-for-web-developers-in-3rd-time-part1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Aierwa">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/upload/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Aierwa | 平凡之路">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/12/after-reading-professional-javascript-for-web-developers-in-3rd-time-part1/" itemprop="url">
-                  【阅读笔记】JavaScript高级程序设计（3rd time）（一）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-12T12:25:55+08:00">
-                2017-08-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>JS，有高分子难么？<br>第三次读这本大作。</p>
-<h2 id="一些基础"><a href="#一些基础" class="headerlink" title="一些基础"></a>一些基础</h2><h3 id="JS简介"><a href="#JS简介" class="headerlink" title="JS简介"></a>JS简介</h3><p>简单的输入验证—》真正的编程语言<br>既简单、又复杂。<br>Brendan Eich / 1995<br>微软在IE3中实现了JScript，竞争Netscape Navigator 3的JavaScript。1996<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/12/after-reading-professional-javascript-for-web-developers-in-3rd-time-part1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1854,7 +1873,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1876,7 +1895,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
