@@ -10,7 +10,7 @@ body{
 header{
     width:7.20rem;
     height: 2.89rem;
-    background-image: url("../img/u=827513130,265095012&fm=200&gp=0.jpg");
+    background-image: url("../images/u=827513130,265095012&fm=200&gp=0.jpg");
     background-size: cover;
     overflow: hidden;
 }
@@ -24,7 +24,7 @@ header{
 #logo{
     width:7.20rem;
     height: 2.89rem;
-    background-image: url("../img/logo.jpg");
+    background-image: url("../images/logo.jpg");
     background-size: cover;
 }
 footer{
@@ -93,10 +93,10 @@ footer{
     height: 0.62rem;
 }
 .tablecontent{
-    padding-top:0.48rem;
+    padding-top:0.2rem;
 }
 .clearboth{
-    color: #969696;
+    color: #696767;
 }
 h2{
    margin-left: 0.3rem;
@@ -106,17 +106,16 @@ h2{
 hr{
     margin-top: 0.07rem;
 }
-.clearboth th{
-    font-size: 0.3rem;
-    width: 2.4rem;
-    text-align: right;
-}
+
 .styled-text{
     width: 3.7rem;
     height: 0.4rem;
-    border-radius:0.1rem;
-    border: 0.01rem solid #9E9E9F;
+    /*border-radius:0.1rem;*/
+    /*border: 0.01rem solid #9E9E9F;*/
     margin-left: 0.1rem;
+    outline: 0;
+    border: 0;
+    background-color: #f0f0f0;
 }
 .space{
     height:0.4rem;
@@ -130,19 +129,23 @@ hr{
 .routertableinfo{
     color: #595957;
     margin: auto;
-    width: 90%;
+    width: 85%;
 
 }
 .routertableinfo th{
     font-size: 0.26rem;
     letter-spacing: 0.02rem;
     width: 40%;
-    border:  1px solid #008da8;
+    border-bottom:  1px solid #dcd6d6;
+    text-align: left;
+    height: 1rem;
 }
 .routertableinfo td{
     font-size: 0.25rem;
-    border:  1px solid #008da8;
-    width: 60%
+    border-bottom:  1px solid #dcd6d6;
+    width: 60%;
+    height: 1rem;
+    text-align: right;
 }
 .routertableinfo tr{
    height: 0.5rem;
@@ -151,28 +154,31 @@ hr{
 .maintable {
     border-collapse: collapse;
     /* table-layout: fixed; */
-    border: 1px solid #ccc;
+    /*border: 1px solid #ccc;*/
     color: #3c3c3c;
     text-align: center;
     margin: auto;
 }
 .maintable th {
-    background-color: #008da8;
+    /*background-color: #008da8;*/
     text-align: center;
     color: #fff;
     padding: 0 4px;
     font-size: 0.27rem;
 }
 .maintable td {
-    border:1px solid #008da8    ;
+    border-bottom:1px solid #dcd6d6    ;
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 0 4px;
     word-break: break-all;
     font-size: 0.2rem;
+    text-align: left;
+
 }
 
 .maintable td:first-child{
+    border-bottom:none ;
     text-align: left;
 }
 .DeviceName{
@@ -211,7 +217,9 @@ hr{
 #setInput{
     text-align: center;
 }
-
+#DeviceConfiguration{
+    width: 5.5rem;
+}
 #DeviceConfiguration td{
     font-size: 0.2rem;
 }
@@ -223,19 +231,7 @@ hr{
     font-size: 0.24rem;
     margin-right: 0.112rem;
 }
-#Repeattime span{
-    border:1px solid #008da8 ;
-    height: 0.4rem;
-    width: 0.56rem;
-    color: #595957;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 0.2rem;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 0.1rem;
-    line-height: 0.4rem;
-}
+
 #bigBackground{
     height: 100%;
     width: 100%;
@@ -250,7 +246,7 @@ hr{
     border: none;
     background-color:#008da8 ;
     height: 0.5rem;
-    width: 1.1rem;
+    width: 80%;
     color: #fff;
     cursor: pointer;
     display: inline-block;
@@ -258,7 +254,7 @@ hr{
     text-align: center;
     text-decoration: none;
     outline: 0;
-    border-radius: 0.12rem;
+    border-radius: 0.25rem;
 }
 .timeSelect{
     width: 0.7rem;
@@ -274,18 +270,23 @@ hr{
 }
 
 
-#SetWifi{
-  width: 2rem;
-   height: 0.6rem;
-  font-size: 0.3rem;
-  margin-left: 0.1rem;
+#SetWifi,#SetVisitorWifi{
+   width: 6.6rem;
+   height: 0.8rem;
+   font-size: 0.3rem;
+    border-radius: 0.4rem;
 }
 .Accelerate{
+    width: 1rem;
+    height: 0.5rem;
     background-color:#008da8 ;
     color: #fff;
+    border: 1px solid #008da8;
+    border-radius: 0.1rem;
+    margin-right: 0.2rem;
 }
 .checkbox_on {
-    background: url(../img/icon_choose_kai.png);
+    background: url(../images/icon_choose_kai.png);
     color: #fff;
     cursor: pointer;
     display: block;
@@ -297,7 +298,7 @@ hr{
     margin-left: 0.1rem;
 }
 .checkbox_off {
-    background: url("../img/icon_choose_guan.png");
+    background: url("../images/icon_choose_guan.png");
     color: #fff;
     cursor: pointer;
     display: block;
@@ -309,4 +310,91 @@ hr{
     background-repeat: no-repeat;
     margin-left: 0.1rem;
 }
+.datecheck{
+    border:1px solid #008da8 ;
+    height: 0.4rem;
+    width: 0.56rem;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0.2rem;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0.1rem;
+    line-height: 0.4rem;
+    background-color:#008da8;
+}
+.date{
+    border:1px solid #008da8 ;
+    height: 0.4rem;
+    width: 0.56rem;
+    color: #595957;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0.2rem;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0.1rem;
+    line-height: 0.4rem;
+}
+.channel{
+   margin-left: 0.1rem;
+}
+.tableImg{
+    width: 1rem;
+    height: 0.8rem;
+    margin-top: 0.23rem;
+    margin-bottom: 0.23rem;
+    vertical-align: middle;
+    margin-left: 0.1rem;
+}
+.SpanDeviceName{
+    font-size: 0.3rem;
+    font-weight: bold;
+    color: #969696;
+}
+#DeviceConfiguration td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 4px;
+    word-break: break-all;
+    font-size: 0.2rem;
+    text-align: left;
+}
+.BlacklistIcon{
+    width: 1.3rem;
+    height: 1.3rem;
+}
+.clearboth{
+    border-collapse:collapse;
+    border:1px solid #dcd6d6;
+    width: 6.6rem;
+    margin: auto;
+}
 
+.clearboth tr{border:1px solid #dcd6d6;}
+
+.clearboth td{
+    text-align: left;
+    border:0px;
+    width: 100%;
+    height: 1.1rem;
+}
+.clearboth th{
+    font-size: 0.3rem;
+    width: 100%;
+    text-align: left;
+    height: 1.1rem;
+
+}
+.name{
+    font-weight: bold;
+    margin-left: 0.2rem;
+}
+.errors{
+    margin: 0;
+    padding: 0;
+    font-size:0.2rem ;
+    margin-left: 0.2rem;
+    color: red;
+}
