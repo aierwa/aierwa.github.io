@@ -3,15 +3,16 @@ var setPassword2=false;
 var setWifiSSID5=false;
 var setPassword5=false;
 //首页在线列表
-var list=[{"DeviceName":"XX的小米5","ip":"192.168.100.152","mac":"00:00:00:00:00:00"},{"DeviceName":"泡泡同学的iPhone","ip":"192.168.100.155","mac":"00:00:00:00:00:00"},{"DeviceName":"HuaWei","ip":"192.168.100.154","mac":"00:00:00:00:00:00"}]
+var list=[{"DeviceName":"XX的小米5","ip":"192.168.100.152","mac":"00:00:00:00:00:00"},{"DeviceName":"泡泡同学的iPhone","ip":"192.168.100.155","mac":"00:00:00:00:00:00"},{"DeviceName":"HuaWei","ip":"192.168.100.154","mac":"00:00:00:00:00:00"},{"DeviceName":"ajduemcjdejwidu……","ip":"192.168.100.154","mac":"00:00:00:00:00:00"}]
 function TableOnline(){
     var dataItems = list;
     var i;
     var html = "";
     for (i = 0; i < list.length; i++) {
-        html += '<tr id="btnTime' + i + '" >';
-        html += '<td width="24%"><div><img src="images/tu_zhongduan_on.png" class="tableImg"></div>' ;
-        html += '<td><div><span class="SpanDeviceName">'+list[i].DeviceName+'</span></div>' ;
+        html += '<tr>';
+        html += '<td width="24%" id="btnTime' + i + '"><div><img src="images/tu_zhongduan_on.png" class="tableImg"></div>' ;
+        html += '<td id="btnMac' + i + '"><div><span class="SpanDeviceName">'+list[i].DeviceName+'</span></div>' ;
+        html += '<td width="24%"><div style="float: right;text-align: center"><img src="images/mobile_wifi_connected.png" class="blacklistImg"><span  class="BlacklistIcon">加入黑名单</span></div>' ;
         html += "</tr>"
     }
     $("#port_table").empty();
@@ -40,8 +41,9 @@ function SetMacEvent(dataItems){
         var data = dataItems[i];
         $("#btnMac" + i).unbind("click").bind("click",function(data){
             return function(){
-                var cmd = [];
-                alert(data.DeviceName)
+                $("#bigBackground").css({display: "block"});
+                $("#ConfigurationBox").css({display: "block"});
+                $("#DeviceName").val(data.DeviceName)
             }
         }(data));
     }
@@ -190,11 +192,24 @@ function verifyWifiSet(){
 }
 
 function int(){
-  TableOnline()
+  TableOnline();
+//    var u = navigator.userAgent, app = navigator.appVersion;
+//    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+//    if (isiOS) {
+//        $('textarea').focus(function () {
+//            window.setTimeout('scrollBottom()', 500);
+//        });
+//    }
+//    function scrollBottom() {
+//        window.scrollTo(0, $('body').height());
+//    }
+//  if(/ipad|iphone|mac/i.test(navigator.userAgent)){
+//      $(".footer").css("position", "static");
+//  }
 }
 $(document).ready(function(){
     //页面数据获取
-//     GetInfo();
+    GetInfo();
     int();
 
 });
