@@ -209,7 +209,7 @@ function int(){
 }
 $(document).ready(function(){
     //页面数据获取
-    GetInfo();
+//     GetInfo();
     int();
 
 });
