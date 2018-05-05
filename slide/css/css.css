@@ -17,15 +17,15 @@ header{
 #background{
     width:7.20rem;
     height: 2.89rem;
-    background-color: #ff736b;
-    opacity: 0.5;
-
+    /*background-color: #ff736b;*/
+    background-color: #d80c18;
+    opacity: 0.8;
 }
 #logo{
-    width:7.20rem;
-    height: 2.89rem;
-    background-image: url("../images/logo.jpg");
-    background-size: cover;
+    /*width:7.20rem;*/
+    /*height: 2.89rem;*/
+    /*background-image: url("../images/logo1.png");*/
+    /*background-size: cover;*/
 }
 footer{
     margin-top:0.4rem ;
@@ -216,7 +216,8 @@ hr{
     float: left;
     border: none;
     /*background-color: #f1eeee;*/
-    background-color: #f72a39;
+    background-color: #d80c18;
+    opacity: 0.8;
 
 }
 #cancelBtn{
@@ -259,7 +260,8 @@ hr{
 .delete {
     border: none;
     /*background-color:#ff736b ;*/
-    background-color:#f72a39 ;
+    background-color:#d80c18 ;
+    opacity: 0.8;
     height: 0.5rem;
     width: 80%;
     color: #fff;
@@ -294,9 +296,10 @@ hr{
 .Accelerate{
     width: 1rem;
     height: 0.5rem;
-    background-color:#f72a39 ;
+    background-color:#d80c18 ;
+    opacity: 0.8;
     color: #fff;
-    border: 1px solid #f72a39;
+    border: 1px solid #d80c18;
     border-radius: 0.1rem;
     margin-right: 0.2rem;
 }
@@ -305,7 +308,7 @@ hr{
     color: #fff;
     cursor: pointer;
     display: block;
-    font-size: 11pt;
+    /*font-size: 11pt;*/
     height: 0.53rem;
     line-height: 24px;
     width: 1.1rem;
@@ -317,7 +320,7 @@ hr{
     color: #fff;
     cursor: pointer;
     display: block;
-    font-size: 11pt;
+    /*font-size: 11pt;*/
     height: 0.53rem;
     line-height: 24px;
     text-align: center;
@@ -357,7 +360,7 @@ hr{
 }
 .tableImg{
     width: 1rem;
-    height: 0.8rem;
+    height: 0.9rem;
     margin-top: 0.23rem;
     margin-bottom: 0.23rem;
     vertical-align: middle;
@@ -419,8 +422,9 @@ hr{
 .errors{
     padding: 0;
     font-size:0.2rem ;
-    margin-left: 0.2rem;
-    color: red;
+    margin-left: 0.95rem;
+    color: #d80c18;
+    opacity: 0.8;
 }
 .ConfigurationBoxName{
     text-align: center;
