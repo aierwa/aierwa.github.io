@@ -617,13 +617,13 @@
 
 <script>
   windowInnerHeight = window.innerHeight; //获取当前浏览器窗口高度
-  alert(windowInnerHeight);
+  //alert(windowInnerHeight);
   $(window).resize(function(){
     if(window.innerHeight < windowInnerHeight){
-        alert(windowInnerHeight);
-        $('.footer').css('position','absoult');//也可以在css文件夹写个类名，然后相对应的removeClass和addClass既可
+        //alert(windowInnerHeight);
+        $('.footer').css('position','static');//也可以在css文件夹写个类名，然后相对应的removeClass和addClass既可
     }else{
-        alert(windowInnerHeight);
+        //alert(windowInnerHeight);
         $('.footer').css('position','fixed');
     }
 });
