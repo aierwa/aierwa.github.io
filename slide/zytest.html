@@ -622,9 +622,11 @@
     if(window.innerHeight < windowInnerHeight){
         //alert(windowInnerHeight);
         $('.footer').css('display','none');//也可以在css文件夹写个类名，然后相对应的removeClass和addClass既可
+        $('#MainContent').css('margin-bottom', '0');
     }else{
         //alert(windowInnerHeight);
         $('.footer').css('display','block');
+        $('#MainContent').css('margin-bottom', '1.5rem');
     }
 });
 
