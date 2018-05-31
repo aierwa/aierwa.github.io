@@ -35,6 +35,7 @@ footer{
     position:fixed;
     bottom:0;
     overflow: hidden;
+     z-index:1000;
 }
 #MainContent{
   background-color: #f0f0f0;
@@ -176,6 +177,7 @@ hr{
     word-break: break-all;
     font-size: 0.2rem;
     text-align: left;
+    height: 1.2rem;
 
 }
 
@@ -191,12 +193,24 @@ hr{
 
 }
 #ConfigurationBox{
-    height: 4rem;
+    /*height: 9.6rem;*/
     /*width: 6rem;*/
     width: 100%;
     border: 1px solid #fff;
     position: absolute;
-    top:4rem;
+    top:0.8rem;
+    /*left: 0.6rem;*/
+    background-color: #fff;
+    color: #595957;
+    z-index: 1000;
+    /*border-radius: 0.1rem;*/
+}
+#ConfigurationBox1,#ConfigurationBox2,#ConfigurationBox3{
+    height: 2.5rem;
+    width: 100%;
+    border: 1px solid #fff;
+    position: absolute;
+    top:5rem;
     /*left: 0.6rem;*/
     background-color: #fff;
     color: #595957;
@@ -205,7 +219,7 @@ hr{
 }
 .styled_buttonSet {
     height: 0.75rem;
-    width: 3.1rem;
+    width: 2.1rem;
     color: #fff;
     cursor: pointer;
     display: inline-block;
@@ -220,14 +234,38 @@ hr{
     opacity: 0.8;
 
 }
-#cancelBtn{
+
+
+.styled_disabled {
+    height: 0.75rem;
+    width: 2.1rem;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0.3rem;
+    text-align: center;
+    text-decoration: none;
+    outline: 0;
+    float: left;
+    border: none;
+    background-color: #cccccc;
+    opacity: 0.8;
+
+}
+
+
+
+.styled_buttonSet1{
+    width: 3.1rem;
+}
+#cancelBtn,#cancelBtn1,#cancelBtn2,#cancelBtn3{
     border-radius: 0.3rem 0 0 0.3rem;
     border-right:1px solid #e4d6d6 ;
 }
-#setBtn{
+#DeleteBtn,#setBtn1,#setBtn2,#setBtn3{
     border-radius: 0 0.3rem 0.3rem 0;
 }
-#setInput{
+#setInput,#setInput1,#setInput2,#setInput3{
     text-align: center;
     margin-left: 0.45rem;
     margin-top: 0.5rem;
@@ -275,18 +313,11 @@ hr{
 }
 .timeSelect{
     width: 0.7rem;
-    height: 0.4rem;
-    /*font-size: 0.1rem;*/
+    height: 0.45rem;
+    border: none;
+    outline: 0;
+    text-align: center;
 }
-
-
-.timeSelect option{
-    /*font-size: 0.2rem;*/
-    line-height:0.1rem
-    display: inline-block;
-}
-
-
 #SetWifi,#SetVisitorWifi{
    width: 6.6rem;
    height: 0.8rem;
@@ -303,35 +334,43 @@ hr{
     border-radius: 0.1rem;
     margin-right: 0.2rem;
 }
+.AccelerateDisable{
+    width: 1rem;
+    height: 0.5rem;
+    background-color:#b5b0b1 ;
+    opacity: 0.8;
+    color: #fff;
+    border: 1px solid #b5b0b1;
+    border-radius: 0.1rem;
+    margin-right: 0.2rem;
+}
+
 .checkbox_on {
-    background: url(../images/icon_choose_kai.png);
+    background: url(../images/icon_choose_kai.png) no-repeat;
     color: #fff;
     cursor: pointer;
     display: block;
-    /*font-size: 11pt;*/
-    height: 0.53rem;
+    height: 0.49rem;
     line-height: 24px;
-    width: 1.1rem;
-    background-repeat: no-repeat;
-    margin-left: 0.1rem;
+    /*width: 1.1rem;*/
+    width: 1rem;
+    margin-right: 0.2rem;
 }
 .checkbox_off {
-    background: url("../images/icon_choose_guan.png");
+    background: url("../images/icon_choose_guan.png") no-repeat;
     color: #fff;
     cursor: pointer;
     display: block;
-    /*font-size: 11pt;*/
-    height: 0.53rem;
+    height: 0.49rem;
     line-height: 24px;
     text-align: center;
-    width: 1.1rem;
-    background-repeat: no-repeat;
-    margin-left: 0.1rem;
+    width:1rem;
+    margin-right: 0.2rem;
 }
 .datecheck{
-    border:1px solid #008da8 ;
-    height: 0.4rem;
-    width: 0.56rem;
+    border:1px solid #e03d46 ;
+    height: 0.5rem;
+    width: 0.58rem;
     color: #fff;
     cursor: pointer;
     display: inline-block;
@@ -339,13 +378,14 @@ hr{
     text-align: center;
     text-decoration: none;
     border-radius: 0.1rem;
-    line-height: 0.4rem;
-    background-color:#008da8;
+    line-height: 0.5rem;
+    background-color:#e03d46;
+    margin-left: 0.05rem;
 }
 .date{
-    border:1px solid #008da8 ;
-    height: 0.4rem;
-    width: 0.56rem;
+    border: 1px solid #e03d46;
+    height: 0.5rem;
+    width: 0.58rem;
     color: #595957;
     cursor: pointer;
     display: inline-block;
@@ -353,19 +393,14 @@ hr{
     text-align: center;
     text-decoration: none;
     border-radius: 0.1rem;
-    line-height: 0.4rem;
+    line-height: 0.5rem;
+    margin-left: 0.05rem;
 }
+
 .channel{
    margin-left: 0.1rem;
 }
-.tableImg{
-    width: 1rem;
-    height: 0.9rem;
-    margin-top: 0.23rem;
-    margin-bottom: 0.23rem;
-    vertical-align: middle;
-    margin-left: 0.1rem;
-}
+
 .blacklistImg{
     width: 1rem;
     height: 0.8rem;
@@ -373,7 +408,15 @@ hr{
     margin-bottom: 0.23rem;
     vertical-align: middle;
 }
+.lockImg{
+    width: 0.35rem;
+    height: 0.5rem;
+    /*margin-top: 0.1rem;*/
+    /*margin-bottom: 0.23rem;*/
+    vertical-align: middle;
+    margin-right: 0.2rem;
 
+}
 .SpanDeviceName{
     font-size: 0.3rem;
     font-weight: bold;
@@ -393,6 +436,9 @@ hr{
     margin-bottom: 0.1rem;
     color: #969696;
 }
+.lockImg{
+
+ }
 .clearboth{
     border-collapse:collapse;
     border:1px solid #dcd6d6;
@@ -433,8 +479,92 @@ hr{
     font-weight: bold;
 }
 #changeName{
-    margin-left: 0.5rem;
-    height: 0.75rem;
+    margin-left: 1rem;
+    height: 0.65rem;
     border: 1px solid #dcd6d6;
+    width: 75%;
+}
+.wireless_2,.wireless_5,.Visitor_2,.Visitor_5,.wireless{
+    display: none;
+}
+.tlitle{
+    font-size: 0.3rem;
+    width: 1.4rem;
+    display: inline-block;
+    text-align: right;
+}
+.urlInput{
+    height: 0.45rem;
+    border: 1px solid #dcd6d6;
+    width: 45%;
+    margin-right: 0.2rem;
+    margin-top: 0.1rem;
+}
+.setName{
     width: 85%;
+    height: 0.75rem;
+    border-radius: 0.1rem;
+    outline: none;
+}
+.Note{
+    width: 100%;
+    text-align: center;
+    margin:0.2rem 0  0.3rem 0;
+   font-size: 0.3rem;
+    font-weight: bold;
+
+}
+.urlSet{
+    width: 2.9rem;
+    float: left;
+    font-size: 0.1rem;
+    display: none;
+    color: #d80c18;
+    opacity: 0.8;
+}
+.urlSetR{
+    width: 3.2rem;
+    float: right;
+    font-size: 0.1rem;
+    display: none;
+     color: #d80c18;
+    opacity: 0.8;
+}
+.CancelWps{
+    height: 0.75rem;
+    width: 6.1rem;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0.3rem;
+    text-align: center;
+    text-decoration: none;
+    outline: 0;
+    border: none;
+    background-color: #d80c18;
+    opacity: 0.8;
+    border-radius: 0.36rem;
+    margin-left: 0.5rem;
+}
+#ConfigurationBox4{
+    height: 5.5rem;
+    width: 100%;
+    border: 1px solid #fff;
+    position: absolute;
+    top:2.9rem;
+    background-color: #fff;
+    color: #595957;
+    z-index: 1000;
+}
+.wpsTitle{
+   margin-bottom: 0.4rem;
+}
+.wpsTime{
+    margin-top: 1rem
+}
+
+.tableImg{
+    height: 0.94rem;
+    overflow: hidden;
+    width: 0.99rem;
 }
