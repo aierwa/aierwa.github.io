@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8" >
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+	<style type="text/css">
+		* {
+			box-sizing: border-box;
+		}
+		body {
+			
+		}
+		.container {
+
+    box-shadow: 6px 9px 10px 0px;
+			padding: 20px;
+			font-family: LiSu;
+			font-size: 1.4rem;
+			max-width: 400px;
+			margin: 0 auto;
+			background: url(./bg3.png) repeat;
+			height: 600px;
+			color: #7c6d6d;
+		}
+		@media screen and (max-width:400px){
+			.container{width:100%;}
+		}
+		.fontKaiTi {
+			font-family: STXingkai, KaiTi;
+			color: #111;
+			font-size: 1.1rem;
+		}
+		.clear {
+			clear: both;
+		}
+		.brideSec p{
+			float: left;
+		}
+		.bridePeople {
+			position: relative;
+			top: -3px;
+		}
+		.invitationSec p:first-child {
+			margin-left: 4rem;
+		}
+		.invitationSec p.bridePeople {
+			float: right;
+			margin-right: 10px;
+		}
+
+		.invitationSec p:nth-child(2) {
+			float: right;
+			margin-right: 15px;
+		}
+		#guest {
+			display: inline-block;
+		    vertical-align: middle;
+		    text-align: center;
+		}
+		
+	</style>
+	<script type="text/javascript">
+		guestJson = {"liug":{"formal":"刘刚&余红翔","informal":"钢牙和余红翔"},"huangxy":{"formal":"张二龙&黄小玉","informal":"玉儿和二龙"},"yul":{"formal":"杜林&余兰","informal":"余兰和阿杜"},"cheny":{"formal":"袁乾戈&陈悦","informal":"月猪和汤圆"},"xuqq":{"formal":"舒其林&许青青","informal":"青青和米其林"},"liuj":{"formal":"刘军&刘丹","informal":"小胖和刘丹"},"zhangy":{"formal":"张扬","informal":"学扬子"},"xiel":{"formal":"谢林","informal":"小蜗"},"xukl":{"formal":"许坤龙","informal":"坤龙"},"quw":{"formal":"瞿伟&肖竹梅","informal":"伟哥和肖肖"},"tangjh":{"formal":"唐金辉","informal":"辉哥"},"pul":{"formal":"蒲磊","informal":"小磊子"},"lik":{"formal":"李坤&乔薇","informal":"李坤和大胖"},"xujy":{"formal":"徐俊怡&罗晓玲","informal":"小姨子和小玲"},"zhangr":{"formal":"张瑞","informal":"大葱"},"xiangjr":{"formal":"向洁然","informal":"然然"},"yangt":{"formal":"杨涛","informal":"杨涛"},"jinbq":{"formal":"靳必强","informal":"强哥"},"shengq":{"formal":"盛琼","informal":"小师妹"},"maof":{"formal":"毛凤","informal":"毛大凤"},"yangs":{"formal":"杨爽","informal":"杨爽"},"zhangxh":{"formal":"张小华","informal":"华华"}};
+	</script>
+
+</head>
+<body>
+	<section class="container">
+		<header></header>
+		<content>
+			<section class="nameSec">
+				<p>送呈&nbsp;&nbsp;<span class="fontKaiTi" id="guest">差不多&nbsp;先生<br>差不多 女士</span>&nbsp;&nbsp;&nbsp;&nbsp;台启</p>
+			</section>
+			<section class="timeSec">
+				<p>谨订&nbsp;农历&nbsp;<span class="fontKaiTi">二零一八年腊月廿八</span></p>
+			</section>
+			<section class="brideSec">
+				<p>为&nbsp;&nbsp;</p>
+				<p class="fontKaiTi bridePeople">许 祥<br>张 杨</p>
+				<p>&nbsp;&nbsp;举行结婚午宴</p>
+			</section>
+			<section class="positionSec clear">
+				<p>席设：<span class="fontKaiTi">四川射洪·香山镇苏家堰村</span></p>
+			</section>
+
+			<section class="invitationSec">
+				<p>阖家统请&nbsp;&nbsp;&nbsp;&nbsp;恭请光临</p>
+				<p>敬邀</p>
+				<p class="fontKaiTi bridePeople">许 祥<br>张 杨</p>
+			</section>
+		</content>
+	</section>
+	<script type="text/javascript">
+		var search = location.search.substr(1);
+		var guestPara = search.split('=')[1];
+		var guestArray = guestJson[guestPara].formal.split('&');
+		var html = guestArray[0];
+		if (guestArray.length == 2) {
+			html += '<br>' + guestArray[1];
+		}
+
+		var guestDom = document.getElementById('guest');
+		guestDom.innerHTML = html;
+
+	</script>
+</body>
+</html>
+
+
