@@ -80,7 +80,7 @@
 <body>
 	<section class="container">
 		<span class="guest" id="guest">哈哈</span>
-        <div style="overflow: hidden">
+        <div style="overflow: hidden" id="btnEgg1">
             <div id="btnEgg" style="float: left">
                 <img  id="btnEggImg" src="img/SurpriseImg1.gif">
             </div>
@@ -101,7 +101,7 @@
 		guestDom.innerHTML = guestJson[guestPara].informal + '！';
 		guestDom.style.fontSize = parseInt(clientWidth)/23 + 'px';
 
-		var btnEgg = document.getElementById('btnEgg'),
+		var btnEgg = document.getElementById('btnEgg1'),
 			video = document.getElementsByTagName('video')[0];
 //		btnEgg.onclick = () => {
 //			if (video.style.display == 'none') {
